@@ -6,7 +6,13 @@ logging:
   config: classpath:log4j2.xml
 ###MyBatis扫描文件位置
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/**/*.xml
+###Pagehelper配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
 
 
 

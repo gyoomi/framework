@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * 类功能描述
  *
@@ -34,5 +36,16 @@ public class UserController extends BaseController {
     public int save(UserEntity userEntity) {
         int rows = userService.save(userEntity);
         return rows;
+    }
+
+    /**
+     * 列表查询
+     *
+     * @return
+     */
+    @RequestMapping(value = "/user/list")
+    public List<UserEntity> findUserList(int pageNum, int pageSize) {
+        List<UserEntity> list = userService.findAllUserList(pageNum, pageSize);
+        return list;
     }
 }

@@ -31,5 +31,5 @@ public interface UserService {
      *
      * @return
      */
-    List<UserEntity> findAllUserList();
+    List<UserEntity> findAllUserList(int pageNum, int PageSize);
 }

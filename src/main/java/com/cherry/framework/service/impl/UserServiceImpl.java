@@ -9,6 +9,7 @@ package com.cherry.framework.service.impl;
 import com.cherry.framework.dao.UserMapper;
 import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +37,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public int save(UserEntity userEntity) {
-        return userMapper.save(userEntity);
+        userMapper.save(userEntity);
+        return userEntity.getUserId();
     }
 
     /**
@@ -45,7 +47,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<UserEntity> findAllUserList() {
+    public List<UserEntity> findAllUserList(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return userMapper.findAllUserList();
     }
 }
