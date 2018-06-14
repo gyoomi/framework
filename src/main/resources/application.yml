@@ -1,3 +1,7 @@
 spring:
   profiles:
     active: dev
+###指定扫描日志配置
+logging:
+  config: classpath:log4j2.xml
+

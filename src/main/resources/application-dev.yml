@@ -1,14 +1,14 @@
 server:
-  port: 8080
+  port: 8081
   servlet:
     path: /
 spring:
   ############  JDBC配置  ###################
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf-8
     username: root
-    password: 1234
+    password: root
     ########### Druid 连接池配置  #############
     #连接池配置
     #Spring Boot中默认支持的连接池有dbcp,dbcp2, tomcat, hikari三种连接池,故需要特殊定制
@@ -27,13 +27,11 @@ spring:
     testOnBorrow: false
     #在连接归还到连接池时是否测试该连接
     testOnReturn: false
-    exceptionSorter: true
     poolPreparedStatements: true
     #配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
     #监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall
     filters: stat,wall,log4j
     maxPoolPreparedStatementPerConnectionSize: 20
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
 
