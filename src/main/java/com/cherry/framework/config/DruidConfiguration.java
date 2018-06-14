@@ -44,7 +44,7 @@ public class DruidConfiguration {
     public ServletRegistrationBean druidServlet() {
         lg.info("初始化 -> [{}]"," Druid Servlet Configuration Start ");
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
-        servletRegistrationBean.addInitParameter("allow", "*");
+        servletRegistrationBean.addInitParameter("allow", "");
         servletRegistrationBean.addInitParameter("deny", "192.168.58.109");
         servletRegistrationBean.addInitParameter("loginUsername", "admin");
         servletRegistrationBean.addInitParameter("loginPassword", "admin");
