@@ -8,11 +8,10 @@ package com.cherry.framework.controller;
 
 import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 类功能描述
@@ -44,8 +43,8 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/user/list")
-    public List<UserEntity> findUserList(int pageNum, int pageSize) {
-        List<UserEntity> list = userService.findAllUserList(pageNum, pageSize);
-        return list;
+    public PageInfo<UserEntity> findUserList(int pageNum, int pageSize) {
+        PageInfo<UserEntity> pageInfo = userService.findAllUserList(pageNum, pageSize);
+        return pageInfo;
     }
 }

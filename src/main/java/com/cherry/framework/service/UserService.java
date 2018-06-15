@@ -7,8 +7,7 @@
 package com.cherry.framework.service;
 
 import com.cherry.framework.model.UserEntity;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
  * User Service
@@ -31,5 +30,5 @@ public interface UserService {
      *
      * @return
      */
-    List<UserEntity> findAllUserList(int pageNum, int PageSize);
+    PageInfo<UserEntity> findAllUserList(int pageNum, int PageSize);
 }
