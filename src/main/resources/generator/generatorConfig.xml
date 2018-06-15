@@ -5,8 +5,10 @@
 <!-- 配置生成器 -->
 <generatorConfiguration>
     <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+
     <!-- 引入配置文件 -->
     <!--<properties resource="mybatis-generator/mybatisGeneratorinit.properties"/>-->
+
     <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
     <!--<classPathEntry location="D:\jar\mysql\mysql-connector-java-5.1.46.jar" />-->
 

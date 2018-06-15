@@ -93,7 +93,7 @@
             <version>${log4j.version}</version>
             <scope>compile</scope>
         </dependency>
-
+        <!-- spring boot test 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
