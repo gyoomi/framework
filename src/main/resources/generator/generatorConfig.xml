@@ -8,26 +8,37 @@
     <!-- 引入配置文件 -->
     <!--<properties resource="mybatis-generator/mybatisGeneratorinit.properties"/>-->
     <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
-    <classPathEntry location="D:\jar\mysql-conn\mysql-connector-java-5.1.7-bin.jar" />
+    <!--<classPathEntry location="D:\jar\mysql\mysql-connector-java-5.1.46.jar" />-->
 
-    <!-- 一个数据库一个context -->
-    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <!--
+        context:生成一组对象的环境
+        id:必选，上下文id，用于在生成错误时提示
+        defaultModelType:指定生成对象的样式
+            1，conditional：类似hierarchical；
+            2，flat：所有内容（主键，blob）等全部生成在一个对象中；
+            3，hierarchical：主键生成一个XXKey对象(key class)，Blob等单独生成一个对象，其他简单属性在一个对象中(record class)
+        targetRuntime:
+            1，MyBatis3：默认的值，生成基于MyBatis3.x以上版本的内容，包括XXXBySample；
+            2，MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample；
+        introspectedColumnImpl：类全限定名，用于扩展MBG
+    -->
     <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
         一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
         <property name="autoDelimitKeywords" value="true" />
         <!-- 生成的Java文件的编码 -->
         <property name="javaFileEncoding" value="utf-8" />
-        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
-        <property name="beginningDelimiter" value="`" />
-        <property name="endingDelimiter" value="`" />
-
         <!-- 格式化java代码 -->
         <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
         <!-- 格式化XML代码 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 生成的pojo，将implements Serializable-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 
         <!-- 注释 -->
@@ -37,10 +48,10 @@
         </commentGenerator>
 
         <!-- jdbc连接 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/demo" userId="root" password="1234" />
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/demo" userId="root" password="root" />
         <!-- 类型转换 -->
         <javaTypeResolver>
-            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer；true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
@@ -49,19 +60,28 @@
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <!-- 生成mapxml文件 -->
+        <!-- 生成mapper xml文件 -->
         <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources" >
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
-        <!-- 生成mapxml对应client，也就是接口dao -->
+        <!-- 生成mapper xml对应client，也就是接口dao -->
         <javaClientGenerator targetPackage="com.cherry.generator.mapper" targetProject="src/main/java" type="XMLMAPPER" >
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
         <table tableName="t_user" domainObjectName="UserEntity" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
-            <property name="useActualColumnNames" value="true" />
+            <!-- 用于指定生成实体类时是否使用实际的列名作为实体类的属性名。false是 Camel Case风格 -->
+            <property name="useActualColumnNames" value="false" />
             <!-- 数据库表主键 -->
-            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
+            <!-- 如果明确的使用columnOverride元素指定了字段对应的实体的属性名,那么useActualColumnNames会被忽略。 -->
+            <!--
+                column 数据库中字段名
+                property POJO属性名
+                javaType POJO类型
+                jdbcType 数据库字段类型
+            -->
+            <!--<columnOverride column="user_id" property="useriddd"></columnOverride>-->
         </table>
     </context>
 </generatorConfiguration>

@@ -126,6 +126,14 @@
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>
+                <!-- 配置这个依赖主要是为了在generatorConfig.xml可以不用配置classPathEntry这样的一个属性,降低了代码的耦合度 -->
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.46</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
