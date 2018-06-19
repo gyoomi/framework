@@ -50,7 +50,7 @@
         </commentGenerator>
 
         <!-- jdbc连接 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/demo" userId="root" password="1234" />
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/demo" userId="root" password="root" />
         <!-- 类型转换 -->
         <javaTypeResolver>
             <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer；true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
@@ -73,9 +73,9 @@
         <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
         <table tableName="t_user" domainObjectName="UserEntity" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <!-- 用于指定生成实体类时是否使用实际的列名作为实体类的属性名。false是 Camel Case风格 -->
-            <property name="useActualColumnNames" value="true" />
+            <property name="useActualColumnNames" value="false" />
             <!-- 数据库表主键 -->
-            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
             <!-- 如果明确的使用columnOverride元素指定了字段对应的实体的属性名,那么useActualColumnNames会被忽略。 -->
             <!--
                 column 数据库中字段名

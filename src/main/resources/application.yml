@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev,red
+    active: dev,redis
 ###指定扫描日志配置
 logging:
   config: classpath:log4j2.xml

@@ -111,13 +111,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-     <!--       &lt;!&ndash; Spring boot使用spring-boot-starter-data-redis来自动配置Lettuce和Jedis这两种redis的Java客户端。默认选用的是Lettuce。 &ndash;&gt;
             <exclusions>
+                <exclusion>
+                    <groupId>redis.clients</groupId>
+                    <artifactId>jedis</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>io.lettuce</groupId>
                     <artifactId>lettuce-core</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
         </dependency>
 
         <!--spring2.0集成redis所需common-pool2-->

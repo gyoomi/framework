@@ -6,6 +6,8 @@
 
 package com.cherry.framework.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.cherry.framework.dao.UserEntityMapper;
 import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
@@ -13,12 +15,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User ServiceImpl
@@ -34,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     /**
      * 新增
@@ -58,8 +62,8 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(pageNum, pageSize);
         List<UserEntity> list = userEntityMapper.selectAll();
         PageInfo<UserEntity> pageInfo = new PageInfo<>(list);
-        redisTemplate.opsForValue().set("User-Name","李昕怡");
-        redisTemplate.opsForValue().set("User-List", list);
+        redisTemplate.opsForList().leftPush("user:list", JSON.toJSONString(list));
+        stringRedisTemplate.opsForValue().set("user:name", "张三");
         return pageInfo;
     }
 }
