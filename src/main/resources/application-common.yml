@@ -1,0 +1,4 @@
+###JWT配置
+jwt:
+   headers: Authorization
+   secert:
