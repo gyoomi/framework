@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FrameworkApplication {
 
     public static void main(String[] args) {
+        System.out.println("Framework start");
         SpringApplication.run(FrameworkApplication.class, args);
     }
 }

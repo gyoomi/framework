@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8090
   servlet:
     path: /
 spring:
   ############  JDBC配置  ###################
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
     password: root
     ########### Druid 连接池配置  #############

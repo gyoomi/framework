@@ -27,6 +27,7 @@
         <log4j.version>1.2.16</log4j.version>
         <common.lang3.version>3.4</common.lang3.version>
         <pagehelper.version>1.2.5</pagehelper.version>
+        <mysql.conn.version>5.1.46</mysql.conn.version>
     </properties>
 
     <dependencies>
@@ -77,6 +78,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.conn.version}</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -166,7 +168,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.46</version>
+                        <version>${mysql.conn.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
