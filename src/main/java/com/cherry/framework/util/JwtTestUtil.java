@@ -20,6 +20,12 @@ import java.util.Map;
  */
 public class JwtTestUtil {
 
+    /**
+     * 生成token
+     *
+     * @return
+     * @throws Exception
+     */
     public static String createToken() throws Exception {
         Date expireDate = new Date(System.currentTimeMillis() + 600000);
         Map<String, Object> claims = new HashMap<>();
@@ -33,6 +39,13 @@ public class JwtTestUtil {
     }
 
 
+    /**
+     * 根据token得到数据声明
+     *
+     * @param token
+     * @return
+     * @throws Exception
+     */
     public static Claims getClaimsFromToken(String token) throws Exception {
         Claims claims;
         try {
