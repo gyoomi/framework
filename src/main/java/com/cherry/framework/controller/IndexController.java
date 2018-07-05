@@ -7,6 +7,7 @@
 package com.cherry.framework.controller;
 
 import com.cherry.framework.constant.JWTConstant;
+import com.cherry.framework.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,15 @@ public class IndexController {
     JWTConstant jwtConstant;
 
     @RequestMapping(value = "/index")
-    public String index() {
+    public String index() throws BusinessException{
         System.out.println("--------------");
         System.out.println(jwtConstant.JWT_HEADERS);
         System.out.println(jwtConstant.JWT_SECERT);
         System.out.println(jwtConstant.JWT_EXPIRETIME);
         System.out.println(jwtConstant.JWT_TOKENHEAD);
+        if (1 == 1) {
+            throw new BusinessException(500, "访问错误，请稍后重试");
+        }
         return "boot-mybatis";
     }
 }
