@@ -1,4 +1,6 @@
 ###JWT配置
 jwt:
-   headers: Authorization
-   secert:
+   jwt_headers: Authorization
+   jwt_secert: leonkeh
+   jwt_expiretime: 6
+   jwt_tokenhead: Bearer
