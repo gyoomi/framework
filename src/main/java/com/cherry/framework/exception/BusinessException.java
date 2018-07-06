@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
  * @version 2018/7/5 21:54
  */
 public class BusinessException extends Exception {
+
     /**
      * 业务错误码
      */
@@ -47,9 +48,19 @@ public class BusinessException extends Exception {
         this.message = message;
     }
 
+    public BusinessException(int code) {
+        super();
+        this.code = code;
+    }
 
 
+    public int getCode() {
+        return code;
+    }
 
-
+    @Override
+    public String getMessage() {
+        return message;
+    }
 
 }

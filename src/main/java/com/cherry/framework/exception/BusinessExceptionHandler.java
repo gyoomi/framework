@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 自定义异常处理器
  *
@@ -21,7 +23,11 @@ public class BusinessExceptionHandler {
 
     @ExceptionHandler(value = BusinessException.class)
     @ResponseBody
-    public BusinessException handleBusinessException(BusinessException businessException) {
-        return businessException;
+    public ErrorInfo handleBusinessException(HttpServletRequest req, BusinessException ex) {
+        ErrorInfo error = new ErrorInfo();
+        error.setCode(ex.getCode());
+        error.setMessage(ex.getMessage());
+        error.setUrl(req.getRequestURL().toString());
+        return error;
     }
 }
