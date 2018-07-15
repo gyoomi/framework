@@ -1,34 +1,28 @@
 /**
- * Copyright © 2018, TaoDing
+ * Copyright © 2018, LeonKeh
  * <p>
  * All Rights Reserved.
  */
 
 package com.cherry.framework.service;
 
+import com.cherry.framework.exception.BusinessException;
 import com.cherry.framework.model.UserEntity;
-import com.github.pagehelper.PageInfo;
 
 /**
- * User Service
+ * 系统用户    Service
  *
  * @author Leon
- * @version 2018/6/14 17:11
+ * @version 2018/7/15 15:02
  */
 public interface UserService {
 
     /**
-     * 新增
+     * 根据登录用户名查找登录用户
      *
-     * @param userEntity
+     * @param loginName
      * @return
+     * @throws BusinessException
      */
-    int save(UserEntity userEntity);
-
-    /**
-     * 查询所有
-     *
-     * @return
-     */
-    PageInfo<UserEntity> findAllUserList(int pageNum, int PageSize);
+    UserEntity findUserByLoginName(String loginName) throws BusinessException;
 }

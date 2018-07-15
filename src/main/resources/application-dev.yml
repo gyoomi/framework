@@ -1,14 +1,14 @@
 server:
   port: 8090
   servlet:
-    path: /
+    path: /fr
 spring:
   ############  JDBC配置  ###################
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://127.0.0.1:3306/fr_db?useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
-    password: root
+    password: 1234
     ########### Druid 连接池配置  #############
     #连接池配置
     #Spring Boot中默认支持的连接池有dbcp,dbcp2, tomcat, hikari三种连接池,故需要特殊定制

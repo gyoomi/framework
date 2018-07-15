@@ -4,3 +4,5 @@ jwt:
    jwt_secert: leonkeh
    jwt_expiretime: 6
    jwt_tokenhead: Bearer
+   jwt_route_authentication_path: /login
+   jwt_route_refreshtoken_path: /refreshToken

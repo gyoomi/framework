@@ -1,31 +1,25 @@
 /**
- * Copyright © 2018, TaoDing
+ * Copyright © 2018, LeonKeh
  * <p>
  * All Rights Reserved.
  */
 
 package com.cherry.framework.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.cherry.framework.dao.UserEntityMapper;
+import com.cherry.framework.exception.BusinessException;
 import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
- * User ServiceImpl
+ * 类功能描述
  *
  * @author Leon
- * @version 2018/6/14 17:12
+ * @version 2018/7/15 15:03
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,37 +27,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserEntityMapper userEntityMapper;
 
-    @Autowired
-    RedisTemplate redisTemplate;
-
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
-
     /**
-     * 新增
+     * 根据登录用户名查找登录用户
      *
-     * @param userEntity
+     * @param loginName
      * @return
+     * @throws BusinessException
      */
     @Override
-    @Transactional
-    public int save(UserEntity userEntity) {
-        userEntityMapper.insert(userEntity);
-        return userEntity.getUserId();
-    }
-
-    /**
-     * 查询所有
-     *
-     * @return
-     */
-    @Override
-    public PageInfo<UserEntity> findAllUserList(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<UserEntity> list = userEntityMapper.selectAll();
-        PageInfo<UserEntity> pageInfo = new PageInfo<>(list);
-        redisTemplate.opsForList().leftPush("user:list", JSON.toJSONString(list));
-        stringRedisTemplate.opsForValue().set("user:name", "张三");
-        return pageInfo;
+    public UserEntity findUserByLoginName(String loginName) throws BusinessException {
+        UserEntity userEntity = null;
+        Optional<String> nameOpt = Optional.ofNullable(loginName);
+        if (nameOpt.isPresent()) {
+            userEntity = nameOpt.map(userEntityMapper::findUserByLoginName).orElse(null);
+        }
+        return userEntity;
     }
 }

@@ -6,7 +6,6 @@
 
 package com.cherry.framework.controller;
 
-import com.cherry.framework.constant.ExceptionConstant;
 import com.cherry.framework.constant.JWTConstant;
 import com.cherry.framework.exception.BusinessException;
 import com.cherry.framework.exception.BusinessExceptionBuilder;
@@ -35,15 +34,6 @@ public class IndexController {
 
     @RequestMapping(value = "/index")
     public String index() throws BusinessException{
-        System.out.println("--------------");
-        System.out.println(jwtConstant.JWT_HEADERS);
-        System.out.println(jwtConstant.JWT_SECERT);
-        System.out.println(jwtConstant.JWT_EXPIRETIME);
-        System.out.println(jwtConstant.JWT_TOKENHEAD);
-        if (1 == 1) {
-            throw beb.build(ExceptionConstant.ERROR_CODE_10000);
-        }
-
         return "boot-mybatis";
     }
 }

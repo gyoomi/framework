@@ -39,6 +39,16 @@ public class JWTConstant {
      */
     public String JWT_TOKENHEAD;
 
+    /**
+     * 认证路径
+     */
+    public String JWT_ROUTE_AUTHENTICATION_PATH;
+
+    /**
+     * 刷新
+     */
+    public String JWT_ROUTE_REFRESHTOKEN_PATH;
+
 
     public String getJWT_HEADERS() {
         return JWT_HEADERS;
@@ -70,5 +80,21 @@ public class JWTConstant {
 
     public void setJWT_TOKENHEAD(String JWT_TOKENHEAD) {
         this.JWT_TOKENHEAD = JWT_TOKENHEAD;
+    }
+
+    public String getJWT_ROUTE_AUTHENTICATION_PATH() {
+        return JWT_ROUTE_AUTHENTICATION_PATH;
+    }
+
+    public void setJWT_ROUTE_AUTHENTICATION_PATH(String JWT_ROUTE_AUTHENTICATION_PATH) {
+        this.JWT_ROUTE_AUTHENTICATION_PATH = JWT_ROUTE_AUTHENTICATION_PATH;
+    }
+
+    public String getJWT_ROUTE_REFRESHTOKEN_PATH() {
+        return JWT_ROUTE_REFRESHTOKEN_PATH;
+    }
+
+    public void setJWT_ROUTE_REFRESHTOKEN_PATH(String JWT_ROUTE_REFRESHTOKEN_PATH) {
+        this.JWT_ROUTE_REFRESHTOKEN_PATH = JWT_ROUTE_REFRESHTOKEN_PATH;
     }
 }
