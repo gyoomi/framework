@@ -91,7 +91,9 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping(value = "/test")
-    public String test() {
+    public String test(HttpServletRequest req) {
+        UserEntity userEntity = getCurrentUser(req);
+        System.out.println(userEntity);
         return "test";
     }
 }
