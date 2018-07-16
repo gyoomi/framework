@@ -49,6 +49,11 @@ public class JWTConstant {
      */
     public String JWT_ROUTE_REFRESHTOKEN_PATH;
 
+    /**
+     * 注册
+     */
+    public String JWT_ROUTE_REGISTER;
+
 
     public String getJWT_HEADERS() {
         return JWT_HEADERS;
@@ -96,5 +101,13 @@ public class JWTConstant {
 
     public void setJWT_ROUTE_REFRESHTOKEN_PATH(String JWT_ROUTE_REFRESHTOKEN_PATH) {
         this.JWT_ROUTE_REFRESHTOKEN_PATH = JWT_ROUTE_REFRESHTOKEN_PATH;
+    }
+
+    public String getJWT_ROUTE_REGISTER() {
+        return JWT_ROUTE_REGISTER;
+    }
+
+    public void setJWT_ROUTE_REGISTER(String JWT_ROUTE_REGISTER) {
+        this.JWT_ROUTE_REGISTER = JWT_ROUTE_REGISTER;
     }
 }

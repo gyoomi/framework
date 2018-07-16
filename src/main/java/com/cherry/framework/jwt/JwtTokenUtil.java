@@ -47,7 +47,8 @@ public class JwtTokenUtil implements Serializable {
         // Expire date
         Date expireDate = nowTime.getTime();
 
-        String jwt = Jwts.builder()
+        String jwt = jwtConstant.JWT_TOKENHEAD + " " +
+                Jwts.builder()
                 .setClaims(claim)
                 .setExpiration(expireDate)
                 .signWith(SignatureAlgorithm.HS512, jwtConstant.JWT_SECERT)

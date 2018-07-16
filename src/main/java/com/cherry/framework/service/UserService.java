@@ -25,4 +25,32 @@ public interface UserService {
      * @throws BusinessException
      */
     UserEntity findUserByLoginName(String loginName) throws BusinessException;
+
+    /**
+     *  保存用户
+     *
+     * @param userEntity
+     * @return
+     * @throws BusinessException
+     */
+    UserEntity save(UserEntity userEntity) throws BusinessException;
+
+    /**
+     * 登录
+     *
+     * @param loginName
+     * @param password
+     * @return
+     * @throws BusinessException
+     */
+    String login(String loginName, String password) throws BusinessException;
+
+    /**
+     * 刷新口令
+     *
+     * @param oldToken
+     * @return
+     * @throws BusinessException
+     */
+    String refresh(String oldToken) throws BusinessException;
 }
