@@ -9,6 +9,8 @@ package com.cherry.framework.config;
 import com.cherry.framework.constant.CommonConstant;
 import com.cherry.framework.constant.JWTConstant;
 import com.cherry.framework.filter.JwtAuthenticationTokenFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +39,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguratioin extends WebSecurityConfigurerAdapter {
 
+    private static final Logger lg = LoggerFactory.getLogger(WebSecurityConfiguratioin.class);
+
     @Autowired
     UserDetailsService userDetailsService;
 
@@ -62,6 +66,7 @@ public class WebSecurityConfiguratioin extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        lg.info("----------Configure Spring Security Start----------");
         String serverPath = commonConstant.SERVER_SERVLET_PATH;
         if ("/".equals(serverPath)) {
             serverPath = "";
@@ -71,11 +76,21 @@ public class WebSecurityConfiguratioin extends WebSecurityConfigurerAdapter {
                 .antMatchers(serverPath + jwtConstant.JWT_ROUTE_AUTHENTICATION_PATH + "/**").permitAll()
                 .antMatchers(serverPath + jwtConstant.JWT_ROUTE_REGISTER + "/**").permitAll()
                 .antMatchers("/druid/**").permitAll()
+                /* swagger start */
+                .antMatchers(serverPath + "/swagger-ui.html").permitAll()
+                .antMatchers(serverPath + "/swagger-resources/**").permitAll()
+                .antMatchers(serverPath + "/images/**").permitAll()
+                .antMatchers(serverPath + "/webjars/**").permitAll()
+                .antMatchers(serverPath + "/v2/api-docs").permitAll()
+                .antMatchers(serverPath + "/configuration/ui").permitAll()
+                .antMatchers(serverPath + "/configuration/security").permitAll()
+                /* swagger end */
                 .antMatchers(HttpMethod.GET, new String[]{"/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js"}).permitAll()
                 .anyRequest().authenticated();
 
         /* httpSecurity.headers().cacheControl(); */
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        lg.info("----------Configure Spring Security End----------");
     }
 
     @Bean

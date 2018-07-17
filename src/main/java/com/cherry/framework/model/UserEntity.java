@@ -1,5 +1,7 @@
 package com.cherry.framework.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "id")
     private Integer id;
 
     /**
@@ -18,6 +21,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "登录名")
     private String loginName;
 
     /**
@@ -26,6 +30,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "用户名")
     private String userName;
 
     /**
@@ -34,6 +39,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "用户密码")
     private String password;
 
     /**
@@ -42,6 +48,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "用户头像url链接地址")
     private String headImgUrl;
 
     /**
@@ -50,6 +57,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "性别")
     private Integer gender;
 
     /**
@@ -58,6 +66,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "手机号")
     private String phoneNumber;
 
     /**
@@ -66,6 +75,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "电子邮箱")
     private String email;
 
     /**
@@ -74,6 +84,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "用户状态：1 - 启用；其他 - 停用")
     private Integer status;
 
     /**
@@ -82,6 +93,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "用户类型：1 - 后台；2 - 钉钉")
     private Integer type;
 
     /**
@@ -90,6 +102,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "登录绑定方式")
     private Integer bindType;
 
     /**
@@ -98,6 +111,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "IP/MAC地址")
     private String ipOrMac;
 
     /**
@@ -106,6 +120,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "备用信息1")
     private String item1;
 
     /**
@@ -114,6 +129,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "备用信息2")
     private String item2;
 
     /**
@@ -122,6 +138,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "备用信息3")
     private String item3;
 
     /**
@@ -130,6 +147,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "备用信息4")
     private String item4;
 
     /**
@@ -138,6 +156,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "备用信息5")
     private String item5;
 
     /**
@@ -146,6 +165,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "创建人id")
     private Integer createUser;
 
     /**
@@ -154,6 +174,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "创建人")
     private String createUserName;
 
     /**
@@ -162,6 +183,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "创建时间")
     private Date createDate;
 
     /**
@@ -170,6 +192,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "修改人id")
     private Integer updateUser;
 
     /**
@@ -178,6 +201,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "修改人")
     private String updateUserName;
 
     /**
@@ -186,6 +210,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "修改人时间")
     private Date updateDate;
 
     /**
@@ -194,6 +219,7 @@ public class UserEntity implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "备注")
     private String remark;
 
     /**

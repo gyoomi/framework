@@ -11,24 +11,28 @@ import com.cherry.framework.exception.BusinessException;
 import com.cherry.framework.exception.BusinessExceptionBuilder;
 import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
- * 类功能描述
+ * 首页   Controller
  *
  * @author Leon
  * @version 2018/6/13 21:53
  */
 @RestController
+@Api(value = "首页", tags = "首页")
 public class IndexController extends BaseController {
 
     private static final Logger lg = LoggerFactory.getLogger(IndexController.class);
@@ -49,6 +53,7 @@ public class IndexController extends BaseController {
      * @throws BusinessException
      */
     @PostMapping(value = "${jwt.jwt_route_register}")
+    @ApiOperation(value = "用户注册")
     public UserEntity register(UserEntity userEntity) throws BusinessException {
         userEntity.setCreateDate(new Date());
         userEntity.setStatus(1);
@@ -90,7 +95,8 @@ public class IndexController extends BaseController {
         throw new RuntimeException("");
     }
 
-    @RequestMapping(value = "/test")
+    @GetMapping(value = "/test")
+    @ApiIgnore
     public String test(HttpServletRequest req) {
         UserEntity userEntity = getCurrentUser(req);
         System.out.println(userEntity);
