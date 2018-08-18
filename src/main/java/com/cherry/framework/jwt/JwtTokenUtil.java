@@ -155,8 +155,8 @@ public class JwtTokenUtil implements Serializable {
         return loginName.equals(jwtUser.getUsername()) && !isExpired(token);
     }
 
-    public String testString() {
-
+    public String testGitConflict() {
+        // 测试冲突
         System.out.println("我要测试模拟");
         return "ceshi";
     }
