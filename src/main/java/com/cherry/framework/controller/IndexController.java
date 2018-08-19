@@ -11,6 +11,10 @@ import com.cherry.framework.exception.BusinessException;
 import com.cherry.framework.exception.BusinessExceptionBuilder;
 import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
+import com.cherry.framework.thread.FileEntity;
+import com.cherry.framework.thread.FileParseTask;
+import com.cherry.framework.thread.Mail;
+import com.cherry.framework.thread.MailSender;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 首页   Controller
@@ -45,6 +51,11 @@ public class IndexController extends BaseController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    MailSender mailSender;
+    @Autowired
+    FileParseTask fileParseTask;
 
     /**
      *  注册
@@ -101,5 +112,42 @@ public class IndexController extends BaseController {
         UserEntity userEntity = getCurrentUser(req);
         System.out.println(userEntity);
         return "test";
+    }
+
+    @GetMapping(value = "/send")
+    public void testMail() {
+        List<Mail> list = new ArrayList<>();
+        Mail m = new Mail();
+        m.setSendUser("张三");
+        m.setTitle("明天上午九点公司小会议召开项目立项会议！！！");
+        list.add(m);
+        Mail m2 = new Mail();
+        m2.setSendUser("李四");
+        m2.setTitle("明天上午九点公司小会议召开项目立项会议！！！");
+        list.add(m2);
+        Mail m3 = new Mail();
+        m3.setSendUser("王五");
+        m3.setTitle("明天上午九点公司小会议召开项目立项会议！！！");
+        list.add(m3);
+        mailSender.addTask(list);
+    }
+
+    @GetMapping(value = "/send2")
+    public void testFile() {
+        List<FileEntity> list = new ArrayList<>();
+        FileEntity f = new FileEntity();
+        f.setName("java编程思想");
+        f.setCreateUser("张三");
+        FileEntity f2 = new FileEntity();
+        f2.setName("java核心技术");
+        f2.setCreateUser("李四");
+        list.add(f);
+        list.add(f2);
+        fileParseTask.addTask(list);
+    }
+
+    @GetMapping(value = "/stop")
+    public void testStop() {
+        mailSender.stopService();
     }
 }
