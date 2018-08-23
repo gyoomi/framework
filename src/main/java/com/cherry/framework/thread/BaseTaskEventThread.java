@@ -92,10 +92,10 @@ public abstract class BaseTaskEventThread<T> extends BaseThread {
             return task;
         } catch (InterruptedException e) {
             lg.error("工作任务获取错误【{}】", this.serviceName, e);
+            return null;
         } finally {
             lock.unlock();
         }
-        return null;
     }
 
     @Override
@@ -142,4 +142,5 @@ public abstract class BaseTaskEventThread<T> extends BaseThread {
             BaseTaskEventThread.lg.info("{}【{}】结束工作！", this.getName(), BaseTaskEventThread.this.serviceName);
         }
     }
+
 }
