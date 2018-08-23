@@ -18,6 +18,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommonConstant {
 
-    @Value(value = "${server.servlet.path}")
+    @Value(value = "${server.servlet.context-path}")
     public String SERVER_SERVLET_PATH;
 }

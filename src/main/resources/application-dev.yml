@@ -1,7 +1,7 @@
 server:
   port: 8090
   servlet:
-    path: /fr
+    context-path: /fr
 spring:
   ############  JDBC配置  ###################
   datasource:

@@ -109,8 +109,8 @@ public class IndexController extends BaseController {
     @GetMapping(value = "/test")
     @ApiIgnore
     public String test(HttpServletRequest req) {
-        UserEntity userEntity = getCurrentUser(req);
-        System.out.println(userEntity);
+        // UserEntity userEntity = getCurrentUser(req);
+        System.out.println("hahha");
         return "test";
     }
 
