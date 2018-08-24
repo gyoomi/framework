@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 类功能描述
+ * 系统配置基类
  *
  * @author Leon
  * @version 2018/8/23 14:40
@@ -28,18 +28,10 @@ public class SystemInit implements InitializingBean, DisposableBean {
     private Map<String, BaseThread> threads = new HashMap<>();
 
     @Override
-    public void destroy() {
-        threads.forEach((k, v) -> {
-            System.out.println(k);
-            System.out.println(v);
-            System.out.println("--------------------");
-        });
-    }
+    public void afterPropertiesSet() throws Exception {}
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("init start.....................................................");
-        System.out.println(threads);
-        System.out.println("init end  .....................................................");
+    public void destroy() {
+        threads.forEach((k, v) -> v.stopService());
     }
 }
