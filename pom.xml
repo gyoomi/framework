@@ -57,6 +57,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- 引入log4j2依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

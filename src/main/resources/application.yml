@@ -1,7 +1,8 @@
 spring:
   profiles:
-    active: dev,redis,common
+    active: dev,redis,common,error
 ###指定扫描日志配置
+# debug: true
 logging:
   config: classpath:log4j2.xml
 ###MyBatis扫描文件位置
@@ -13,6 +14,7 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
 
 
 

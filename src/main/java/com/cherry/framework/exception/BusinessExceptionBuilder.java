@@ -7,7 +7,6 @@
 package com.cherry.framework.exception;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
  * @version 2018/7/6 16:55
  */
 @Component
-@PropertySource(value = "classpath:application-error.yml", ignoreResourceNotFound = true)
 public class BusinessExceptionBuilder extends Exception {
 
     @Autowired

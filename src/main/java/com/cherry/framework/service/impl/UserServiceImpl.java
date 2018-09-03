@@ -6,22 +6,23 @@
 
 package com.cherry.framework.service.impl;
 
+import com.cherry.framework.constant.ExceptionConstant;
 import com.cherry.framework.constant.JWTConstant;
 import com.cherry.framework.dao.UserEntityMapper;
 import com.cherry.framework.exception.BusinessException;
+import com.cherry.framework.exception.BusinessExceptionBuilder;
 import com.cherry.framework.jwt.JwtTokenUtil;
 import com.cherry.framework.jwt.JwtUser;
 import com.cherry.framework.model.UserEntity;
-import com.cherry.framework.model.UserRoleEntity;
 import com.cherry.framework.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -50,7 +51,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDetailsService userDetailsService;
 
-    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    BusinessExceptionBuilder beb;
 
     /**
      * 根据登录用户名查找登录用户
@@ -85,7 +90,7 @@ public class UserServiceImpl implements UserService {
                 throw new RuntimeException("用户已存在");
             }
         }
-        userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         userEntityMapper.insert(userEntity);
         return userEntity;
     }
@@ -100,9 +105,15 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String login(String loginName, String password) throws BusinessException {
+        if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
+            throw beb.build(ExceptionConstant.ERROR_CODE_10001);
+        }
         UserEntity userEntity = userEntityMapper.findUserByLoginName(loginName);
-        if (userEntity == null || !encoder.matches(password, userEntity.getPassword())) {
-            return null;
+        if (userEntity == null) {
+            throw beb.build(ExceptionConstant.ERROR_CODE_10002);
+        }
+        if (!passwordEncoder.matches(password, userEntity.getPassword())) {
+            throw beb.build(ExceptionConstant.ERROR_CODE_10003);
         }
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(loginName, password);
         Authentication authenticate = authenticationManager.authenticate(upToken);
