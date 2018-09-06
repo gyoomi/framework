@@ -49,6 +49,7 @@ public class DruidConfiguration {
         servletRegistrationBean.addInitParameter("loginUsername", "admin");
         servletRegistrationBean.addInitParameter("loginPassword", "admin");
         servletRegistrationBean.addInitParameter("resetEnable", "false");
+        lg.info("初始化 -> [{}]"," Druid Servlet Configuration End ");
         return servletRegistrationBean;
     }
 

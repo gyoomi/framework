@@ -1,11 +1,15 @@
 package com.cherry.framework;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.time.LocalDateTime;
 
 /**
  * 系统配置基类
@@ -18,8 +22,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "com.cherry.framework")
 public class FrameworkApplication extends SpringBootServletInitializer {
 
+    private static final Logger lg = LoggerFactory.getLogger(FrameworkApplication.class);
+
     public static void main(String[] args) {
-        System.out.println("Framework start");
+        lg.info("Framework start at 【{}】", LocalDateTime.now());
         SpringApplication.run(FrameworkApplication.class, args);
     }
 
