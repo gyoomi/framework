@@ -84,7 +84,7 @@ public class IndexController extends BaseController {
      * @return
      * @throws BusinessException
      */
-    @PostMapping(value = "/${jwt.jwt_route_authentication_path}")
+    @PostMapping(value = "${jwt.jwt_route_authentication_path}")
     public String login(String loginName, String password) throws BusinessException {
         String token = userService.login(loginName, password);
         return token;
