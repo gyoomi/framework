@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -111,11 +111,16 @@ public class IndexController extends BaseController {
     }
 
     @GetMapping(value = "/test")
-    @ApiIgnore
-    public String test(HttpServletRequest req) {
+    public ModelAndView test(HttpServletRequest req) {
         // UserEntity userEntity = getCurrentUser(req);
-        System.out.println("hahha");
-        return "test";
+        UserEntity user = new UserEntity();
+        user.setLoginName("tom");
+        user.setId(234);
+        user.setBindType(1);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("user", user);
+        mv.setViewName("/user/show.html");
+        return mv;
     }
 
     @GetMapping(value = "/send")
