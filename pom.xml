@@ -79,6 +79,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!-- quartz依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
         <!-- 引入log4j2依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -205,6 +211,8 @@
             <artifactId>guava</artifactId>
             <version>20.0</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
