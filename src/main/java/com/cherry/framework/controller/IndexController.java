@@ -13,8 +13,8 @@ import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
 import com.cherry.framework.thread.FileEntity;
 import com.cherry.framework.thread.FileParseTask;
+import com.cherry.framework.thread.FrameWorkMailSender;
 import com.cherry.framework.thread.Mail;
-import com.cherry.framework.thread.MailSender;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -53,7 +53,8 @@ public class IndexController extends BaseController {
     UserService userService;
 
     @Autowired
-    MailSender mailSender;
+    FrameWorkMailSender mailSender;
+
     @Autowired
     FileParseTask fileParseTask;
 
@@ -128,15 +129,21 @@ public class IndexController extends BaseController {
         List<Mail> list = new ArrayList<>();
         Mail m = new Mail();
         m.setSendUser("张三");
-        m.setTitle("明天上午九点公司小会议召开项目立项会议！！！");
+        m.setTitle("会议通知");
+        m.setContent("明天上午九点公司小会议召开项目立项会议！！");
+        m.setTo("362808128@qq.com");
         list.add(m);
         Mail m2 = new Mail();
         m2.setSendUser("李四");
-        m2.setTitle("明天上午九点公司小会议召开项目立项会议！！！");
+        m2.setTitle("会议通知");
+        m2.setContent("明天上午九点公司小会议召开项目立项会议！！！");
+        m2.setTo("362808128@qq.com");
         list.add(m2);
         Mail m3 = new Mail();
         m3.setSendUser("王五");
-        m3.setTitle("明天上午九点公司小会议召开项目立项会议！！！");
+        m3.setTitle("会议通知");
+        m3.setContent("明天上午九点公司小会议召开项目立项会议！！！");
+        m3.setTo("362808128@qq.com");
         list.add(m3);
         mailSender.addTask(list);
     }

@@ -28,6 +28,6 @@ public class MyCronJob extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         System.out.println("任务执行了" + new Date());
-        indexController.testMail();
+        // indexController.testMail();
     }
 }

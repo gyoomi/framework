@@ -18,6 +18,7 @@ public class Mail {
     private String title;
     private String content;
     private String sendUser;
+    private String to;
 
     public String getId() {
         return id;
@@ -49,5 +50,13 @@ public class Mail {
 
     public void setSendUser(String sendUser) {
         this.sendUser = sendUser;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
     }
 }

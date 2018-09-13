@@ -1,0 +1,15 @@
+###Mail邮件配置spring:
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 956457231@qq.com
+    password:
+    default-encoding: UTF-8
+    properties:
+      mial:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
