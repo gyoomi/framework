@@ -10,7 +10,6 @@ import com.cherry.framework.job.MyCronJob;
 import com.cherry.framework.job.MyJob;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 定时任务配置
@@ -18,8 +17,8 @@ import org.springframework.context.annotation.Configuration;
  * @author Leon
  * @version 2018/9/12 11:41
  */
-@Configuration
-public class JobConfiguration {
+// @Configuration
+public class QuartzConfiguration {
 
     @Bean
     public JobDetail myJobDetail() {

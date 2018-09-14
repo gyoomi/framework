@@ -1,0 +1,12 @@
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    in-memory: true
+    user: admin
+    password: admin
+    pool:
+      enabled: true
+      create-connection-on-startup: true
+  # springboot默认采用的是p2p模式进行消息的监听
+  jms:
+    pub-sub-domain: true

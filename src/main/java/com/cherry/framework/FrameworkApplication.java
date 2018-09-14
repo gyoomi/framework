@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
  * @author Leon
  * @version 2018/5/23 14:40
  */
+@EnableScheduling
 @SpringBootApplication
 @MapperScan(value = "com.cherry.framework.dao")
 @ComponentScan(basePackages = "com.cherry.framework")
