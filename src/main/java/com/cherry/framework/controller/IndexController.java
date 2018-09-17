@@ -11,8 +11,6 @@ import com.cherry.framework.exception.BusinessException;
 import com.cherry.framework.exception.BusinessExceptionBuilder;
 import com.cherry.framework.model.UserEntity;
 import com.cherry.framework.service.UserService;
-import com.cherry.framework.thread.FileEntity;
-import com.cherry.framework.thread.FileParseTask;
 import com.cherry.framework.thread.FrameWorkMailSender;
 import com.cherry.framework.thread.Mail;
 import io.swagger.annotations.Api;
@@ -55,8 +53,6 @@ public class IndexController extends BaseController {
     @Autowired
     FrameWorkMailSender mailSender;
 
-    @Autowired
-    FileParseTask fileParseTask;
 
     /**
      *  注册
@@ -150,16 +146,7 @@ public class IndexController extends BaseController {
 
     @GetMapping(value = "/send2")
     public void testFile() {
-        List<FileEntity> list = new ArrayList<>();
-        FileEntity f = new FileEntity();
-        f.setName("java编程思想");
-        f.setCreateUser("张三");
-        FileEntity f2 = new FileEntity();
-        f2.setName("java核心技术");
-        f2.setCreateUser("李四");
-        list.add(f);
-        list.add(f2);
-        fileParseTask.addTask(list);
+
     }
 
     @GetMapping(value = "/stop")
