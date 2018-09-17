@@ -6,6 +6,7 @@
 
 package com.cherry.framework.controller;
 
+import com.cherry.framework.constant.ExceptionConstant;
 import com.cherry.framework.constant.JWTConstant;
 import com.cherry.framework.exception.BusinessException;
 import com.cherry.framework.exception.BusinessExceptionBuilder;
@@ -19,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +55,6 @@ public class IndexController extends BaseController {
 
     @Autowired
     FrameWorkMailSender mailSender;
-
 
     /**
      *  注册
@@ -145,8 +147,10 @@ public class IndexController extends BaseController {
     }
 
     @GetMapping(value = "/send2")
-    public void testFile() {
-
+    @Retryable(value = {BusinessException.class}, maxAttempts = 3, backoff = @Backoff(delay = 2000, multiplier = 2))
+    public void testFile() throws BusinessException {
+        System.out.println(new Date().toLocaleString());
+        throw beb.build(ExceptionConstant.ERROR_CODE_10000);
     }
 
     @GetMapping(value = "/stop")

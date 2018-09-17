@@ -161,6 +161,16 @@
             <version>${common.lang3.version}</version>
         </dependency>
 
+        <!-- Spring boot 重试依赖 -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
         <!-- Spring Boot Redis依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
