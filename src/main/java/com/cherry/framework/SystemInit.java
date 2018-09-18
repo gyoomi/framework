@@ -28,7 +28,9 @@ public class SystemInit implements InitializingBean, DisposableBean {
     private Map<String, BaseThread> threads = new HashMap<>();
 
     @Override
-    public void afterPropertiesSet() throws Exception {}
+    public void afterPropertiesSet() throws Exception {
+        threads.forEach((k, v) -> v.start());
+    }
 
     @Override
     public void destroy() {
