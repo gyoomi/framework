@@ -6,6 +6,7 @@
 
 package com.cherry.framework.service.impl;
 
+import com.cherry.framework.aspect.Log;
 import com.cherry.framework.constant.ExceptionConstant;
 import com.cherry.framework.constant.JWTConstant;
 import com.cherry.framework.dao.UserEntityMapper;
@@ -65,6 +66,7 @@ public class UserServiceImpl implements UserService {
      * @throws BusinessException
      */
     @Override
+    @Log(content = "根据用户查询用户")
     public UserEntity findUserByLoginName(String loginName) throws BusinessException {
         UserEntity userEntity = null;
         Optional<String> nameOpt = Optional.ofNullable(loginName);
@@ -82,6 +84,7 @@ public class UserServiceImpl implements UserService {
      * @throws BusinessException
      */
     @Override
+    @Log(content = "保存用户")
     public UserEntity save(UserEntity userEntity) throws BusinessException {
         String loginName = userEntity.getLoginName();
         if (loginName != null) {
@@ -104,6 +107,7 @@ public class UserServiceImpl implements UserService {
      * @throws BusinessException
      */
     @Override
+    @Log(content = "登录校验用户")
     public String login(String loginName, String password) throws BusinessException {
         if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
             throw beb.build(ExceptionConstant.ERROR_CODE_10001);
@@ -132,6 +136,7 @@ public class UserServiceImpl implements UserService {
      * @throws BusinessException
      */
     @Override
+    @Log(content = "刷新令牌")
     public String refresh(String oldToken) throws BusinessException {
         final String token = oldToken.substring((jwtConstant.JWT_TOKENHEAD + " ").length());
         String loginName = jwtTokenUtil.getLoginNameFromToken(token);

@@ -85,10 +85,6 @@ public class IndexController extends BaseController {
      */
     @PostMapping(value = "${jwt.jwt_route_authentication_path}")
     public String login(String loginName, String password) throws BusinessException {
-        lg.info("info");
-        lg.debug("debug");
-        lg.error("error");
-        lg.warn("warn");
         String token = userService.login(loginName, password);
         return token;
     }
