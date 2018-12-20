@@ -37,6 +37,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @author Leon
  * @version 2018/6/17 17:46
  */
+// @ConditionalOnExpression 动态配置此配置
 @Configuration
 @EnableCaching
 public class RedisConfiguration extends CachingConfigurerSupport {
