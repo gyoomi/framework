@@ -42,6 +42,8 @@ Log4j2高性能日志框架、邮件发送、多线程接口等功能的快速�
 
 **SpringBoot之War和Jar包部署-基于Spring Boot2.x版本：[链接](https://blog.csdn.net/weixin_39723544/article/details/82012827)**
 
+...
+
 # 5. 后续功能
 
 **移除MyBatis，依赖JDBC封装JDBC**
@@ -49,6 +51,8 @@ Log4j2高性能日志框架、邮件发送、多线程接口等功能的快速�
 **工作流**
 
 **项目模块化**
+
+...
 
 
 
