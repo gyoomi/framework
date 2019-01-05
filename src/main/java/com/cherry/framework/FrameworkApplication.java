@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 @EnableScheduling
 @SpringBootApplication
 @MapperScan(value = "com.cherry.framework.dao")
-@ComponentScan(basePackages = "com.cherry.framework")
 public class FrameworkApplication extends SpringBootServletInitializer {
 
     private static final Logger lg = LoggerFactory.getLogger(FrameworkApplication.class);
