@@ -6,7 +6,7 @@
 
 package com.cherry.framework;
 
-import com.cherry.framework.thread.BaseThread;
+import com.cherry.framework.core.thread.BaseThread;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

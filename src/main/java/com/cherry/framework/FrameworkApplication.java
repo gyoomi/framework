@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @EnableRetry
 @EnableScheduling
 @SpringBootApplication
-@MapperScan(value = "com.cherry.framework.dao")
+@MapperScan(value = "com.cherry.framework.platform.dao")
 public class FrameworkApplication extends SpringBootServletInitializer {
 
     private static final Logger lg = LoggerFactory.getLogger(FrameworkApplication.class);

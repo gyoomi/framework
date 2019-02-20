@@ -58,7 +58,7 @@
         </javaTypeResolver>
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="com.cherry.framework.model" targetProject="src/main/java" >
+        <javaModelGenerator targetPackage="com.cherry.framework.platform.model" targetProject="src/main/java" >
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -67,7 +67,7 @@
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
         <!-- 生成mapper xml对应client，也就是接口dao -->
-        <javaClientGenerator targetPackage="com.cherry.framework.dao" targetProject="src/main/java" type="XMLMAPPER" >
+        <javaClientGenerator targetPackage="com.cherry.framework.platform.dao" targetProject="src/main/java" type="XMLMAPPER" >
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
  <!--       &lt;!&ndash; table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 &ndash;&gt;
