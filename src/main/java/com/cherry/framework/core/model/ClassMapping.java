@@ -41,11 +41,19 @@ public class ClassMapping implements Serializable {
         this.pkProperty = pkProperty;
     }
 
-    public Map<String, DBMappingProperty> getFields() {
-        return fields;
+    public void addProperty(String columnName, DBMappingProperty mp) {
+        this.fields.put(columnName, mp);
     }
 
-    public void setFields(Map<String, DBMappingProperty> fields) {
-        this.fields = fields;
+    public boolean hasProperty(String columnName) {
+        return this.fields.containsKey(columnName);
+    }
+
+    public DBMappingProperty getProperty(String columnName) {
+        return this.fields.get(columnName);
+    }
+
+    public Map<String, DBMappingProperty> getAllProperties() {
+        return this.fields;
     }
 }
