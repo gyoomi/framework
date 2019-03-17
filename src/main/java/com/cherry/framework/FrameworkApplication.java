@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.retry.annotation.EnableRetry;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 @EnableRetry
 @EnableScheduling
 @SpringBootApplication
+@ServletComponentScan
 @MapperScan(value = "com.cherry.framework.platform.dao")
 public class FrameworkApplication extends SpringBootServletInitializer {
 

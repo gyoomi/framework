@@ -15,8 +15,8 @@ import org.springframework.jms.annotation.EnableJms;
  * @author Leon
  * @version 2018/9/14 16:15
  */
-@Configuration
-@EnableJms
+//@Configuration
+//@EnableJms
 public class ActiveMQConfiguration {
 
 

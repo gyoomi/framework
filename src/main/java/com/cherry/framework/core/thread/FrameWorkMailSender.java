@@ -20,7 +20,6 @@ import javax.mail.internet.MimeMessage;
  * @author Leon
  * @version 2018/8/18 23:40
  */
-@Component
 public class FrameWorkMailSender extends BaseTaskEventThread<Mail> {
 
     @Autowired
@@ -29,8 +28,8 @@ public class FrameWorkMailSender extends BaseTaskEventThread<Mail> {
     @Value("${spring.mail.username}")
     private String from;
 
-    public FrameWorkMailSender() {
-        super("邮件发送服务");
+    public FrameWorkMailSender(String name) {
+        super(name);
     }
 
     @Override

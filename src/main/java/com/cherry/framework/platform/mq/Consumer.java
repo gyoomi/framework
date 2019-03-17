@@ -17,18 +17,18 @@ import org.springframework.stereotype.Component;
  * @author Leon
  * @version 2018/9/14 16:21
  */
-@Component
-public class Consumer {
-
-    private static final Logger lg = LoggerFactory.getLogger(Consumer.class);
-
-    @JmsListener(destination = "base.topic")
-    public void consume01(String text) {
-        lg.info("消费者1：消费了【{}】", text);
-    }
-
-    @JmsListener(destination = "base.topic")
-    public void consume02(String text) {
-        lg.info("消费者2：消费了【{}】", text);
-    }
-}
+//@Component
+//public class Consumer {
+//
+//    private static final Logger lg = LoggerFactory.getLogger(Consumer.class);
+//
+//    @JmsListener(destination = "base.topic")
+//    public void consume01(String text) {
+//        lg.info("消费者1：消费了【{}】", text);
+//    }
+//
+//    @JmsListener(destination = "base.topic")
+//    public void consume02(String text) {
+//        lg.info("消费者2：消费了【{}】", text);
+//    }
+//}

@@ -53,8 +53,6 @@ public class IndexController extends BaseController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    FrameWorkMailSender mailSender;
 
     /**
      *  注册
@@ -139,7 +137,7 @@ public class IndexController extends BaseController {
         m3.setContent("明天上午九点公司小会议召开项目立项会议！！！");
         m3.setTo("362808128@qq.com");
         list.add(m3);
-        mailSender.addTask(list);
+        // mailSender.addTask(list);
     }
 
     @GetMapping(value = "/send2")
@@ -149,8 +147,4 @@ public class IndexController extends BaseController {
         throw beb.build(ExceptionConstant.ERROR_CODE_10000);
     }
 
-    @GetMapping(value = "/stop")
-    public void testStop() {
-        mailSender.stopService();
-    }
 }

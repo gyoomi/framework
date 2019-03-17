@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <version>1.0</version>
+    <description>Cherry Java Platform</description>
+
+    <!-- Whole status of site: dev, product -->
+    <status>dev</status>
+    <!-- 附件存储引擎: file, mongodb，alibaba -->
+    <attachment-engine>mongodb</attachment-engine>
+
+    <!-- 登陆安全策略 -->
+    <login>
+        <lock>false</lock>	<!-- 临时锁定功能开启标志 -->
+        <times>5</times>	<!-- 连续失败最大次数 -->
+        <duration>60</duration>	<!-- 临时锁定时长：秒 -->
+        <code>fasle</code>	<!-- 登录页验证码功能开启标志 -->
+    </login>
+
+    <!-- 后台自动服务 -->
+    <threads>
+        <thread name="Mail发送服务" start="true">com.cherry.framework.core.thread.FrameWorkMailSender</thread>
+    </threads>
+</config>

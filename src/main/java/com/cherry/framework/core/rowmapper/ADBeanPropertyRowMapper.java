@@ -4,14 +4,17 @@ import com.cherry.framework.core.model.ClassMapping;
 import com.cherry.framework.core.model.DBMappingProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.*;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.util.StringUtils;
 
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -114,7 +117,49 @@ public class ADBeanPropertyRowMapper<T> implements RowMapper<T> {
 
     @Override
     public T mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
+        T rowObject = BeanUtils.instantiateClass(this.mappedClass);
+        BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(rowObject);
+        ClassMapping mappingRole = mappingClassCache.get(this.mappedClass.getName());
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+        Map<String, PropertyDescriptor> normalFieldCache = mappingClassNormalPropertyCache.get(this.mappedClass.getName());
+
+        for (int index = 1; index < columnCount; ++index) {
+            String columnName;
+            if (this.rsmdFieldCache.containsKey(index)) {
+                columnName = this.rsmdFieldCache.get(index);
+            } else {
+                columnName = JdbcUtils.lookupColumnName(rsmd, index);
+                this.rsmdFieldCache.put(index, columnName);
+            }
+
+            String propertyName;
+            Class propertyClass;
+            if (mappingRole.hasProperty(columnName)) {
+                DBMappingProperty dbMP = mappingRole.getProperty(columnName);
+                propertyName = dbMP.getName();
+                propertyClass = dbMP.getType();
+            } else {
+                if (null == normalFieldCache || !normalFieldCache.containsKey(columnName)) {
+                    continue;
+                }
+                PropertyDescriptor pd = normalFieldCache.get(columnName);
+                propertyName = pd.getName();
+                propertyClass = pd.getPropertyType();
+            }
+            try {
+                Object value = this.getColumnValue(rs, index, propertyClass);
+                bw.setPropertyValue(columnName, value);
+            } catch (NotWritablePropertyException e) {
+                throw new DataRetrievalFailureException("Unable map to column " + columnName + " to property " + propertyName, e);
+            }
+        }
+
+        return rowObject;
+    }
+
+    private Object getColumnValue(ResultSet rs, int index, Class<?> propertyType) throws SQLException {
+        return JdbcUtils.getResultSetValue(rs, index, propertyType);
     }
 
     public boolean isCheckFullyPopulated() {
