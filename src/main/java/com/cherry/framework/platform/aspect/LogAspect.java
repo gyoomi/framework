@@ -7,7 +7,6 @@
 package com.cherry.framework.platform.aspect;
 
 import com.alibaba.fastjson.JSON;
-import com.cherry.framework.platform.exception.BusinessException;
 import com.cherry.framework.platform.jwt.JwtUser;
 import com.cherry.framework.platform.model.LogEntity;
 import com.cherry.framework.platform.model.UserEntity;
@@ -15,12 +14,13 @@ import com.cherry.framework.platform.service.LogService;
 import com.cherry.framework.platform.utils.IPUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -33,9 +33,9 @@ import java.util.Date;
  * @author Leon
  * @version 2018/12/11 14:11
  */
-@Order(value = Integer.MAX_VALUE)
-@Aspect
-@Component
+//@Order(value = Integer.MAX_VALUE)
+//@Aspect
+//@Component
 public class LogAspect {
 
     private static final Logger lg = LoggerFactory.getLogger(LogAspect.class);
@@ -72,7 +72,7 @@ public class LogAspect {
         time.remove();
     }
 
-    private void writeSystemLog(ProceedingJoinPoint joinPoint, HttpServletRequest req, Log log) throws BusinessException {
+    private void writeSystemLog(ProceedingJoinPoint joinPoint, HttpServletRequest req, Log log) throws Exception {
         JwtUser jwtUser = (JwtUser) req.getAttribute("currentUser");
         UserEntity currentUser = null;
         LogEntity logEntity = new LogEntity();

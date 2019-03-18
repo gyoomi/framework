@@ -36,11 +36,11 @@
 
     <dependencies>
         <!-- war包如果成功，放开此注释 -->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -143,7 +143,7 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc14</artifactId>
             <version>10.2.0.4.0</version>
-            <scope>runtime</scope>
+            <!--<scope>runtime</scope>-->
         </dependency>
 
         <!-- druid连接池 -->
@@ -295,7 +295,7 @@
             </plugin>
 
             <!-- MyBatis 逆向工程 插件 -->
-            <plugin>
+<!--            <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
@@ -304,7 +304,7 @@
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>
-                <!-- 配置这个依赖主要是为了在generatorConfig.xml可以不用配置classPathEntry这样的一个属性,降低了代码的耦合度 -->
+                &lt;!&ndash; 配置这个依赖主要是为了在generatorConfig.xml可以不用配置classPathEntry这样的一个属性,降低了代码的耦合度 &ndash;&gt;
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
@@ -312,7 +312,7 @@
                         <version>${mysql.conn.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin>-->
 
             <!-- 指定jdk编译版本 -->
             <plugin>

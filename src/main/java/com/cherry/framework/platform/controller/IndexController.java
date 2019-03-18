@@ -6,16 +6,12 @@
 
 package com.cherry.framework.platform.controller;
 
-import com.cherry.framework.platform.constant.ExceptionConstant;
+import com.cherry.framework.core.controller.BaseController;
+import com.cherry.framework.core.model.BusinessException;
+import com.cherry.framework.core.thread.Mail;
 import com.cherry.framework.platform.constant.JWTConstant;
-import com.cherry.framework.platform.exception.BusinessException;
-import com.cherry.framework.platform.exception.BusinessExceptionBuilder;
 import com.cherry.framework.platform.model.UserEntity;
 import com.cherry.framework.platform.service.UserService;
-import com.cherry.framework.core.thread.FrameWorkMailSender;
-import com.cherry.framework.core.thread.Mail;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,16 +35,12 @@ import java.util.List;
  * @version 2018/6/13 21:53
  */
 @RestController
-@Api(value = "首页", tags = "首页")
 public class IndexController extends BaseController {
 
     private static final Logger lg = LoggerFactory.getLogger(IndexController.class);
 
     @Autowired
     JWTConstant jwtConstant;
-
-    @Autowired
-    BusinessExceptionBuilder beb;
 
     @Autowired
     UserService userService;
@@ -58,11 +50,10 @@ public class IndexController extends BaseController {
      *  注册
      *
      * @param userEntity
-     * @throws BusinessException
+     * @throws Exception
      */
     @PostMapping(value = "${jwt.jwt_route_register}")
-    @ApiOperation(value = "用户注册")
-    public UserEntity register(UserEntity userEntity) throws BusinessException {
+    public UserEntity register(UserEntity userEntity) throws Exception {
         userEntity.setCreateDate(new Date());
         userEntity.setStatus(1);
         userEntity.setBindType(1);
@@ -79,12 +70,17 @@ public class IndexController extends BaseController {
      * @param loginName
      * @param password
      * @return
-     * @throws BusinessException
+     * @throws Exception
      */
     @PostMapping(value = "${jwt.jwt_route_authentication_path}")
-    public String login(String loginName, String password) throws BusinessException {
+    public String login(String loginName, String password) throws Exception {
         String token = userService.login(loginName, password);
         return token;
+    }
+
+    @GetMapping(value = "/test")
+    public String test() throws Exception {
+        return "hello framework";
     }
 
     /**
@@ -92,10 +88,10 @@ public class IndexController extends BaseController {
      *
      * @param req
      * @return
-     * @throws BusinessException
+     * @throws Exception
      */
     @PostMapping(value = "${jwt.jwt_route_refreshtoken_path}")
-    public String refresh(HttpServletRequest req) throws BusinessException {
+    public String refresh(HttpServletRequest req) throws Exception {
         String token = req.getHeader(jwtConstant.JWT_HEADERS);
         if (StringUtils.isNotBlank(token)) {
             return userService.refresh(token);
@@ -103,12 +99,11 @@ public class IndexController extends BaseController {
         throw new RuntimeException("");
     }
 
-    @GetMapping(value = "/test")
+    @GetMapping(value = "/test11")
     public ModelAndView test(HttpServletRequest req) {
         // UserEntity userEntity = getCurrentUser(req);
         UserEntity user = new UserEntity();
         user.setLoginName("tom");
-        user.setId(234);
         user.setBindType(1);
         ModelAndView mv = new ModelAndView();
         mv.addObject("user", user);
@@ -144,7 +139,7 @@ public class IndexController extends BaseController {
     @Retryable(value = {BusinessException.class}, maxAttempts = 3, backoff = @Backoff(delay = 2000, multiplier = 2))
     public void testFile() throws BusinessException {
         System.out.println(new Date().toLocaleString());
-        throw beb.build(ExceptionConstant.ERROR_CODE_10000);
+        throw new BusinessException("服务器内部代码错误，请稍后重试");
     }
 
 }
