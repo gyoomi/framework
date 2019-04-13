@@ -28,6 +28,10 @@ public class FrameworkApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         lg.info("Framework start at 【{}】", LocalDateTime.now());
+
+
+
+
         SpringApplication.run(FrameworkApplication.class, args);
     }
 
