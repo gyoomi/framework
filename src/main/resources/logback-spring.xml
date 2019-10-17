@@ -1,0 +1,44 @@
+<configuration>
+
+	<!-- Global vars -->
+	<!--<timestamp key="date" datePattern="yyyyMMdd"/>-->
+
+	<!-- File -->
+	<appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>./logs/framework.log</file>
+		<append>true</append>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>./logs/framework-%d{yyyyMMdd}.log</fileNamePattern>
+			<!-- keep 30 days' worth of history capped at 3GB total size -->
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %5p %-40.40logger{39} : %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Console -->
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %5p %-40.40logger{39} : %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Logger -->
+	<logger name="org.springframework" level="INFO"/>
+	<!-- TODO 默认异常日志都是Debug级别，开启后日志过多	-->
+	<logger name="org.springframework.security.web.access" level="DEBUG"/>
+
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="DEBUG"/>
+	<logger name="com.gyoomi" level="DEBUG"/>
+
+	<!-- Root -->
+	<root level="WARN">
+		<appender-ref ref="File"/>
+		<appender-ref ref="Console"/>
+	</root>
+</configuration>
