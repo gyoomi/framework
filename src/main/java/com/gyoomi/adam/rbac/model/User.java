@@ -65,11 +65,6 @@ public class User implements Serializable {
     private Long createUser;
 
     /**
-     * 创建人
-     */
-    private String createUserName;
-
-    /**
      * 创建时间
      */
     private Date createDate;
@@ -78,11 +73,6 @@ public class User implements Serializable {
      * 修改人id
      */
     private Long updateUser;
-
-    /**
-     * 修改人
-     */
-    private String updateUserName;
 
     /**
      * 修改时间

@@ -14,26 +14,49 @@ import java.util.Date;
 @Data
 public class Dept implements Serializable {
 
+    /**
+     * 主键
+     */
     private Long id;
 
+    /**
+     * 部门名称
+     */
     private String name;
 
+    /**
+     * 部门编号
+     */
     private String nodeNo;
 
+    /**
+     * 父部门的编号
+     */
     private String parentNodeNo;
 
-    private Integer createUser;
+    /**
+     * 创建人id
+     */
+    private Long createUser;
 
-    private String createUserName;
-
+    /**
+     * 创建时间
+     */
     private Date createDate;
 
+    /**
+     * 修改人id
+     */
     private Long updateUser;
 
-    private String updateUserName;
-
+    /**
+     * 修改时间
+     */
     private Date updateDate;
 
+    /**
+     * 备注
+     */
     private String remark;
 
 

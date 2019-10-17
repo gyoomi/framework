@@ -14,28 +14,49 @@ import java.util.Date;
 @Data
 public class Role implements Serializable {
 
+    /**
+     * 主键
+     */
     private Long id;
 
-    private String nodeNo;
-
+    /**
+     * 角色名称
+     */
     private String name;
 
+    /**
+     * 角色编号
+     */
+    private String nodeNo;
+
+    /**
+     * 角色标识
+     */
     private String description;
 
-    private Integer isInitial;
-
+    /**
+     * 创建人id
+     */
     private Long createUser;
 
-    private String createUserName;
-
+    /**
+     * 创建时间
+     */
     private Date createDate;
 
+    /**
+     * 修改人id
+     */
     private Long updateUser;
 
-    private String updateUserName;
-
+    /**
+     * 修改时间
+     */
     private Date updateDate;
 
+    /**
+     * 备注
+     */
     private String remark;
 
 }
