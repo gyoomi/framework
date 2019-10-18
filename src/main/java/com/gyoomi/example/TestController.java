@@ -4,7 +4,7 @@
  * All Rights Reserved.
  */
 
-package com.gyoomi.adam;
+package com.gyoomi.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

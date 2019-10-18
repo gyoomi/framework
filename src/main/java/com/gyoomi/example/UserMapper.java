@@ -4,7 +4,7 @@
  * All Rights Reserved.
  */
 
-package com.gyoomi.adam;
+package com.gyoomi.example;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;

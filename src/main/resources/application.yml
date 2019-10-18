@@ -31,9 +31,11 @@ spring:
       timeBetweenEvictionRunsMillis: 60000
       minEvictableIdleTimeMillis: 300000
 #===========================================
-#   Spring
+#   Mybatis
 #===========================================
 mybatis-plus:
   global-config:
     db-config:
       id-type: id_worker_str
+  configuration:
+    cache-enabled: false
