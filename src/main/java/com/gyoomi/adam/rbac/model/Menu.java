@@ -20,7 +20,7 @@ public class Menu implements Serializable {
     /**
      * 主键
      */
-    private Long id;
+    private String id;
 
     /**
      * 菜单名称
@@ -74,7 +74,7 @@ public class Menu implements Serializable {
     /**
      * 创建人id
      */
-    private Long createUser;
+    private String createUser;
 
     /**
      * 创建时间
@@ -84,7 +84,7 @@ public class Menu implements Serializable {
     /**
      * 修改人id
      */
-    private Long updateUser;
+    private String updateUser;
 
     /**
      * 修改时间

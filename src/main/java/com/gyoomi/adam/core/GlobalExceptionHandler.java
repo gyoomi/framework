@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = BusinessException.class)
     public Object handleBusinessException(HttpServletRequest req, BusinessException ex) {
+        lg.error(ex.toString());
         HashMap<String, Object> e = new HashMap<>();
         e.put("code", ex.getCode());
         e.put("message", ex.getMessage());

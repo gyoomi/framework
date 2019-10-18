@@ -19,7 +19,7 @@ public class LoginLog implements Serializable {
     /**
      * 主键
      */
-    private Long id;
+    private String id;
 
     /**
      * 用户账号

@@ -17,7 +17,7 @@ public class User implements Serializable {
     /**
      * 主键
      */
-    private Long id;
+    private String id;
 
     /**
      * 登录名
@@ -62,7 +62,7 @@ public class User implements Serializable {
     /**
      * 创建人id
      */
-    private Long createUser;
+    private String createUser;
 
     /**
      * 创建时间
@@ -72,7 +72,7 @@ public class User implements Serializable {
     /**
      * 修改人id
      */
-    private Long updateUser;
+    private String updateUser;
 
     /**
      * 修改时间

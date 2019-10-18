@@ -1,5 +1,6 @@
 package com.gyoomi;
 
+import com.gyoomi.adam.core.CHERRY;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +21,7 @@ public class FrameworkApplication {
 
     public static void main(String[] args) {
         lg.info("Framework start at 【{}】", LocalDateTime.now());
-        SpringApplication.run(FrameworkApplication.class, args);
+        CHERRY.SPRING_CONTEXT = SpringApplication.run(FrameworkApplication.class, args);
     }
 
 }

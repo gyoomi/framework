@@ -17,7 +17,7 @@ public class Dept implements Serializable {
     /**
      * 主键
      */
-    private Long id;
+    private String id;
 
     /**
      * 部门名称
@@ -37,7 +37,7 @@ public class Dept implements Serializable {
     /**
      * 创建人id
      */
-    private Long createUser;
+    private String createUser;
 
     /**
      * 创建时间
@@ -47,7 +47,7 @@ public class Dept implements Serializable {
     /**
      * 修改人id
      */
-    private Long updateUser;
+    private String updateUser;
 
     /**
      * 修改时间

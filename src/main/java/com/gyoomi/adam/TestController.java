@@ -22,9 +22,21 @@ public class TestController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private UserMapper userMapper;
+
+
     @GetMapping(value = "/index")
     public String test() {
-        System.out.println(jdbcTemplate);
+        User user = new User();
+        user.setNickName("test昵称！！");
+        userMapper.insert(user);
         return "hello framework 2.0 ";
+    }
+
+    @GetMapping(value = "/select")
+    public User select() {
+        return userMapper.selectById("1185122568228818946");
     }
 }

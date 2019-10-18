@@ -21,7 +21,7 @@ public class Log implements Serializable {
     /**
      * 主键
      */
-    private Long id;
+    private String id;
 
     /**
      * 操作模块

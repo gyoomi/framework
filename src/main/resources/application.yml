@@ -13,14 +13,12 @@ server:
 #===========================================
 #   Spring
 #===========================================
-
-
 spring:
   application:
     name: framework
   datasource:
     druid:
-      url: jdbc:mysql://127.0.0.1:3306/db?zeroDateTimeBehavior=convertToNull&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://127.0.0.1:3306/test?zeroDateTimeBehavior=convertToNull&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
       username: root
       password: root
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -32,3 +30,10 @@ spring:
       testOnReturn: false
       timeBetweenEvictionRunsMillis: 60000
       minEvictableIdleTimeMillis: 300000
+#===========================================
+#   Spring
+#===========================================
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: id_worker_str
