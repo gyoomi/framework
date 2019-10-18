@@ -1,7 +1,18 @@
 #===========================================
 #   Adam Framework
 #===========================================
-
+adam:
+  access-key:
+    header-name: Adam-AK
+    request-name: adamAk
+  token:
+    header-name: Adam-Token
+    request-name: adamToken
+  security:
+    sign-in:
+      lock: false
+  status: dev
+  version: v1.0
 
 #===========================================
 #   Server

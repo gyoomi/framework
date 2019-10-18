@@ -21,7 +21,7 @@ public abstract class BaseController {
 
     public BaseController() {}
 
-    public static void printRequestParameters(HttpServletRequest req) {
+    protected static void printRequestParameters(HttpServletRequest req) {
         lg.debug("------------------ Request Parameters ------------------");
         Enumeration params = req.getParameterNames();
 
@@ -33,7 +33,7 @@ public abstract class BaseController {
         lg.debug("------------------ Request Parameters ------------------");
     }
 
-    public static void printRequestHeaders(HttpServletRequest req) {
+    protected static void printRequestHeaders(HttpServletRequest req) {
         lg.debug("------------------ Request Headers  ------------------");
         Enumeration headerNames = req.getHeaderNames();
 
@@ -45,7 +45,7 @@ public abstract class BaseController {
         lg.debug("------------------ Request Headers ------------------");
     }
 
-    public <T> T mapping(HttpServletRequest req, Class<T> clazz) throws Exception {
+    protected <T> T mapping(HttpServletRequest req, Class<T> clazz) throws Exception {
         T obj = clazz.newInstance();
         BeanUtils.populate(obj, req.getParameterMap());
         return obj;
@@ -66,7 +66,7 @@ public abstract class BaseController {
         return ps;
     }
 
-    public static boolean isAjaxRequest(HttpServletRequest req) {
+    protected static boolean isAjaxRequest(HttpServletRequest req) {
         return StringUtils.isNotBlank(req.getHeader("X-Requested-With")) && "XMLHttpRequest".equals(req.getHeader("X-Requested-With"));
     }
 }

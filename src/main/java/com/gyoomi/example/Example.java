@@ -9,6 +9,8 @@ package com.gyoomi.example;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * The description of class
  *
@@ -16,16 +18,31 @@ import lombok.Data;
  * @date 2019-10-18 15:33
  */
 @Data
-@TableName(value = "user")
-public class User {
+@TableName(value = "example")
+public class Example {
 
+    /**
+     * 主键
+     */
     private String id;
 
-    private String loginName;
+    /**
+     * 名称
+     */
+    private String name;
 
-    private String nickName;
+    /**
+     * 计数
+     */
+    private Integer total;
 
-    private String password;
-
+    /**
+     * 备注
+     */
     private String remark;
+
+    /**
+     * 创建时间
+     */
+    private Date createDate;
 }

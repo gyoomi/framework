@@ -1,0 +1,25 @@
+{
+  "properties": [
+    {
+      "sourceType": "com.gyoomi.adam.core.properties.AdamProperties",
+      "name": "adam",
+      "type": "com.gyoomi.adam.core.properties.AdamProperties"
+    },
+    {
+      "name": "adam.access-key.header-name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "adam.access-key.request-name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "adam.token.header-name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "adam.token.request-name",
+      "type": "java.lang.String"
+    }
+  ]
+}

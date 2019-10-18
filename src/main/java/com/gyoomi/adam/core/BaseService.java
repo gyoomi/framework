@@ -22,7 +22,7 @@ public abstract class BaseService {
      * @param <T> 泛型
      * @return 容器中的实例Bean
      */
-    private static <T> T getSpringBean(Class<T> clazz) {
+    protected static <T> T getSpringBean(Class<T> clazz) {
         return CHERRY.SPRING_CONTEXT.getBean(clazz);
     }
 
