@@ -6,12 +6,16 @@
 
 package com.gyoomi.example;
 
+import com.gyoomi.adam.core.BusinessException;
 import com.gyoomi.adam.core.CHERRY;
+import com.gyoomi.adam.core.model.Response;
 import com.gyoomi.adam.core.properties.AdamProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -49,7 +53,25 @@ public class ExampleController {
     }
 
     @GetMapping(value = "/select")
-    public Example select() {
-        return CHERRY.SPRING_CONTEXT.getBean(ExampleMapper.class).selectById("1185122568228818946");
+    public Response select() {
+        return Response.builder()
+                .code(HttpServletResponse.SC_OK)
+                .data(CHERRY.SPRING_CONTEXT.getBean(ExampleMapper.class).selectById("1185122568228818946"))
+                .build();
     }
+
+    @GetMapping(value = "/test-error/{num}")
+    public Response testError(@PathVariable int num) throws Exception {
+        if (num <= 10) {
+           int s = 10 / num;
+        } else {
+            throw new BusinessException(500, "数字小于，请检查后进行提交");
+        }
+        return Response.builder()
+                .code(HttpServletResponse.SC_OK)
+                .data(CHERRY.SPRING_CONTEXT.getBean(ExampleMapper.class).selectById("1185122568228818946"))
+                .build();
+    }
+
+
 }

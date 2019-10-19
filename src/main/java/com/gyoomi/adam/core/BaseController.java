@@ -53,12 +53,12 @@ public abstract class BaseController {
 
     protected PageSort getPageSort(HttpServletRequest req) {
         PageSort ps = new PageSort();
-        if (StringUtils.isNotBlank(req.getParameter("page"))) {
-            ps.setPageNumber(Long.valueOf(req.getParameter("page")));
+        if (StringUtils.isNotBlank(req.getParameter("pageNo"))) {
+            ps.setPageNo(Long.valueOf(req.getParameter("page")));
         }
 
-        if (StringUtils.isNotBlank(req.getParameter("rows"))) {
-            ps.setPageSize(Integer.valueOf(req.getParameter("rows")));
+        if (StringUtils.isNotBlank(req.getParameter("pageSize"))) {
+            ps.setPageSize(Integer.valueOf(req.getParameter("pageSize")));
         }
 
         ps.setSortName(req.getParameter("sort"));
