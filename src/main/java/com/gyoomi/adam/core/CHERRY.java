@@ -27,6 +27,7 @@ public class CHERRY {
     public final static String PATTERN_DATE = "yyyy-MM-dd";
 
     public final static DateTimeFormatter FORMATTER_DATE = DateTimeFormatter.ofPattern(CHERRY.PATTERN_DATE);
+    public final static DateTimeFormatter FORMATTER_DATE_TIME = DateTimeFormatter.ofPattern(CHERRY.PATTERN_DATE_TIME);
 
     /**
      * 时间格式

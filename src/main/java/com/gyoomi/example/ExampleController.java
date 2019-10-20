@@ -6,11 +6,13 @@
 
 package com.gyoomi.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gyoomi.adam.core.BusinessException;
 import com.gyoomi.adam.core.CHERRY;
 import com.gyoomi.adam.core.model.Response;
 import com.gyoomi.adam.core.properties.AdamProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,6 +72,19 @@ public class ExampleController {
         return Response.builder()
                 .code(HttpServletResponse.SC_OK)
                 .data(CHERRY.SPRING_CONTEXT.getBean(ExampleMapper.class).selectById("1185122568228818946"))
+                .build();
+    }
+
+    @GetMapping(value = "/redis")
+    public Response testRedis() throws Exception {
+        Example example = new Example();
+        example.setCreateDate(new Date());
+        example.setName("test name");
+        CHERRY.SPRING_CONTEXT.getBean(StringRedisTemplate.class).opsForValue().set("test-redis", new ObjectMapper().writeValueAsString(example));
+
+        return Response.builder()
+                .code(HttpServletResponse.SC_OK)
+                .data("ok")
                 .build();
     }
 
