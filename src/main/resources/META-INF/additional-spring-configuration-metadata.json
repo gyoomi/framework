@@ -20,6 +20,31 @@
     {
       "name": "adam.token.request-name",
       "type": "java.lang.String"
+    },
+    {
+      "name": "adam.security.sign-in.lock",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "name": "adam.security.sign-in.expiration",
+      "type": "java.lang.Long"
+    },
+    {
+      "sourceType": "com.gyoomi.adam.core.properties.JwtTokenProperties",
+      "name": "adam.security.jwt-token",
+      "type": "com.gyoomi.adam.core.properties.JwtTokenProperties"
+    },
+    {
+      "name": "adam.security.jwt-token.header-name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "adam.security.jwt-token.request-name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "adam.security.jwt-token.secret",
+      "type": "java.lang.String"
     }
   ]
 }

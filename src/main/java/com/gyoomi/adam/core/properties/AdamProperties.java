@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 类功能描述
+ * Adam Config
  *
  * @author Leon
  * @version 2019/10/18 21:40
@@ -26,6 +26,11 @@ public class AdamProperties {
      * eg: v1.0
      */
     private String version;
+
+    /**
+     * name
+     */
+    private String name;
 
     @NestedConfigurationProperty
     private Token token = new Token();
@@ -89,12 +94,23 @@ public class AdamProperties {
         @NestedConfigurationProperty
         private SignIn signIn = new SignIn();
 
+        @NestedConfigurationProperty
+        private JwtTokenProperties jwtToken = new JwtTokenProperties();
+
         public SignIn getSignIn() {
             return signIn;
         }
 
         public void setSignIn(SignIn signIn) {
             this.signIn = signIn;
+        }
+
+        public JwtTokenProperties getJwtToken() {
+            return jwtToken;
+        }
+
+        public void setJwtToken(JwtTokenProperties jwtToken) {
+            this.jwtToken = jwtToken;
         }
     }
 
@@ -111,6 +127,11 @@ public class AdamProperties {
          * default : 5 minutes
          */
         private long lockedSeconds = 300;
+
+        /**
+         * default : 30 minutes
+         */
+        private long expiration = 1800;
 
         public boolean isLock() {
             return lock;
@@ -134,6 +155,14 @@ public class AdamProperties {
 
         public void setLockedSeconds(long lockedSeconds) {
             this.lockedSeconds = lockedSeconds;
+        }
+
+        public long getExpiration() {
+            return expiration;
+        }
+
+        public void setExpiration(long expiration) {
+            this.expiration = expiration;
         }
     }
 
@@ -175,5 +204,13 @@ public class AdamProperties {
 
     public void setSecurity(Security security) {
         this.security = security;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -20,7 +20,7 @@ public class FrameworkApplication {
     private static final Logger lg = LoggerFactory.getLogger(FrameworkApplication.class);
 
     public static void main(String[] args) {
-        lg.info("Framework start at 【{}】", LocalDateTime.now().format(CHERRY.FORMATTER_DATE_TIME));
+        lg.info("Adam-framework start at 【{}】", LocalDateTime.now().format(CHERRY.FORMATTER_DATE_TIME));
         CHERRY.SPRING_CONTEXT = SpringApplication.run(FrameworkApplication.class, args);
     }
 

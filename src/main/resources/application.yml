@@ -9,10 +9,15 @@ adam:
     header-name: Adam-Token
     request-name: adamToken
   security:
+    jwt-token:
+      header-name: Authorization
+      request-name: authorization
+      secret: weor234,!!!
     sign-in:
       lock: false
   status: dev
   version: v1.0
+  name: adam-framework
 
 #===========================================
 #   Server
