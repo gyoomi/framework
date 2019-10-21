@@ -2,9 +2,12 @@ package com.gyoomi.adam.core.jwt;
 
 import com.gyoomi.adam.core.properties.AdamProperties;
 import com.gyoomi.adam.core.utils.DateUtils;
-import io.jsonwebtoken.Claims;
+import com.gyoomi.adam.rbac.model.User;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -12,10 +15,11 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 类功能描述
+ * JwtTokenUtils
  *
  * @author Leon
  * @version 2019/10/20 21:15
@@ -23,9 +27,9 @@ import java.util.Map;
 @Component
 public class JwtTokenUtils {
 
-    @Autowired
-    private static AdamProperties adamProperties;
+    private static final Logger lg = LoggerFactory.getLogger(JwtTokenUtils.class);
 
+    private static AdamProperties adamProperties;
 
     /**
      * 生成token
@@ -42,60 +46,56 @@ public class JwtTokenUtils {
                 .setExpiration(DateUtils.localDateTimeToDate(expireLocalDateTime))
                 .signWith(SignatureAlgorithm.HS512, adamProperties.getSecurity().getJwtToken().getSecret())
                 .compact();
-        return jwtPrefix + jwtToken;
+        return jwtPrefix + " " + jwtToken;
     }
 
     /**
-     * 根据用户，生成口令
+     * 根据用户信息生成口令
+     * <p>注意： 不能嵌套放置，否则无法解析</p>
      *
      * @param jwtUser jwtUser
      * @return token
      */
-//    public String createToken(JwtUser jwtUser) throws Exception {
-//        Map<String, String> claims = BeanUtils.describe(jwtUser.getUser());
-//        claims.put("created", new Date());
-//        return createToken(claims);
-//    }
-    public static void main(String[] args) {
-//        new User()
-//
-//        BeanUtils.describe();
+    public static String createToken(JwtUser jwtUser) {
+        Map<String, Object> claims = new HashMap<>();
+        User user = jwtUser.getUser();
+        claims.put("loginName", user.getLoginName());
+        claims.put("nickName", user.getNickName());
+        claims.put("headImg", user.getHeadImg());
+        claims.put("phoneNumber", user.getPhoneNumber());
+        claims.put("email", user.getEmail());
+        claims.put("createDate", new Date());
+        return createToken(claims);
     }
-
-
 
     /**
      * 根据token得到数据声明
      *
-     * @param token
-     * @return
-     * @throws Exception
+     * @param token token
+     * @return result
      */
-    public Claims getClaimsFromToken(String token) {
-        Claims claims;
-        try {
-            claims = Jwts.parser().setSigningKey(adamProperties.getSecurity().getJwtToken().getSecret()).parseClaimsJws(token).getBody();
-        } catch (Exception e) {
-            claims = null;
-            e.printStackTrace();
-        }
-        return claims;
+    public static Map<String, Object> getClaimsFromToken(String token) throws ExpiredJwtException {
+        String realToken = token.replace(adamProperties.getSecurity().getJwtToken().getPrefix() + " ", "");
+
+        return Jwts.parser()
+                    .setSigningKey(adamProperties.getSecurity().getJwtToken().getSecret())
+                    .parseClaimsJws(realToken)
+                    .getBody();
     }
 
     /**
-     * 从口令中获得用户名
+     * 解析用户
      *
-     * @param token
-     * @return
-     * @throws Exception
+     * @param token token
+     * @return result
      */
-    public String getLoginNameFromToken(String token){
-        String loginName = null;
+    public static String getLoginNameFromToken(String token) {
+        String loginName;
         try {
-            Claims claims = getClaimsFromToken(token);
-            loginName = claims.getSubject();
+            loginName = ((String) getClaimsFromToken(token).get("loginName"));
         } catch (Exception e) {
-            e.printStackTrace();
+            loginName = null;
+            lg.error("JWT Error :", e);
         }
         return loginName;
     }
@@ -104,50 +104,53 @@ public class JwtTokenUtils {
      * 判断口令是否过期
      *
      * @param token
-     * @return
-     * @throws Exception
+     * @return result
      */
-    public boolean isExpired(String token) {
-        boolean isExpired = true;
+    public static boolean isExpired(String token) {
+        boolean isExpired = false;
         try {
-            isExpired = getClaimsFromToken(token).getExpiration().before(new Date());
+            Map<String, Object> claims = JwtTokenUtils.getClaimsFromToken(token);
         } catch (Exception e) {
-            e.printStackTrace();
+            isExpired = true;
+            lg.error("JWT expired error :", e);
         }
         return isExpired;
     }
 
-    /**
-     * 刷新口令
-     *
-     * @param token
-     * @return
-     * @throws Exception
-     */
-    public String refreshToken(String token) {
-        String reToken = null;
-        try {
-            Claims claims = getClaimsFromToken(token);
-            claims.put("created", new Date());
-            reToken = createToken(claims);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return reToken;
-    }
+//    /**
+//     * 刷新口令
+//     *
+//     * @param token
+//     * @return
+//     * @throws Exception
+//     */
+//    public static String refreshToken(String token) {
+//        String reToken = null;
+//        try {
+//            Claims claims = getClaimsFromToken(token);
+//            claims.put("created", new Date());
+//            reToken = createToken(claims);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return reToken;
+//    }
 
     /**
      * 验证口令
      *
-     * @param token
-     * @param userDetails
-     * @return
-     * @throws Exception
+     * @param token token
+     * @param userDetails userDetails
+     * @return result
      */
-    public boolean validateToken(String token, UserDetails userDetails) {
+    public static boolean valid(String token, UserDetails userDetails) {
         JwtUser jwtUser = (JwtUser) userDetails;
         String loginName = getLoginNameFromToken(token);
-        return loginName.equals(jwtUser.getUsername()) && !isExpired(token);
+        // failure
+        if (loginName == null) {
+            return false;
+        }
+        return loginName.equals(jwtUser.getUser().getLoginName()) && !isExpired(token);
     }
 
     @Autowired
