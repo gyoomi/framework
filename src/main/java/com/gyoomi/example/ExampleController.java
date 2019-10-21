@@ -54,7 +54,7 @@ public class ExampleController {
         return "hello framework 2.0 " + LocalDateTime.now();
     }
 
-    @GetMapping(value = "/select")
+    @GetMapping(value = "/interface/select")
     public Response select() {
         return Response.builder()
                 .code(HttpServletResponse.SC_OK)

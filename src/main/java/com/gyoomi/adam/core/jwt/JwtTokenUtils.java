@@ -144,10 +144,14 @@ public class JwtTokenUtils {
      * @return result
      */
     public static boolean valid(String token, UserDetails userDetails) {
+        if (null == token || null == userDetails) {
+            return false;
+        }
+
         JwtUser jwtUser = (JwtUser) userDetails;
         String loginName = getLoginNameFromToken(token);
         // failure
-        if (loginName == null) {
+        if (loginName == null || jwtUser == null) {
             return false;
         }
         return loginName.equals(jwtUser.getUser().getLoginName()) && !isExpired(token);

@@ -1,12 +1,16 @@
 package com.gyoomi.adam.core;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.gyoomi.adam.core.model.PageSort;
+import com.gyoomi.adam.core.model.Response;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
 /**
@@ -68,5 +72,33 @@ public abstract class BaseController {
 
     protected static boolean isAjaxRequest(HttpServletRequest req) {
         return StringUtils.isNotBlank(req.getHeader("X-Requested-With")) && "XMLHttpRequest".equals(req.getHeader("X-Requested-With"));
+    }
+
+    /**
+     * 返回Json回应给客户端
+     *
+     * @param rsp       回应信息
+     * @param httpRsp   HttpServletResponse
+     */
+    public static void writeJsonResponse(Response rsp, HttpServletResponse httpRsp)
+    {
+        String json = JSON.toJSONString(rsp,
+                SerializerFeature.WriteDateUseDateFormat,
+                SerializerFeature.WriteMapNullValue,
+                SerializerFeature.WriteNullStringAsEmpty,
+                SerializerFeature.WriteNonStringValueAsString);
+        lg.debug("JSON:\r\n{}", json);
+
+        try
+        {
+            httpRsp.setContentType("application/json;charset=utf-8");
+            httpRsp.setStatus(HttpServletResponse.SC_OK);
+            httpRsp.getWriter().write(json);
+            httpRsp.getWriter().flush();
+        }
+        catch (Exception e)
+        {
+            lg.error("Response Json回写失败：", e);
+        }
     }
 }
