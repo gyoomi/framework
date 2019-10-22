@@ -1,8 +1,11 @@
 package com.gyoomi.adam.core;
 
+import com.gyoomi.adam.rbac.model.InterfaceClient;
 import org.springframework.context.ApplicationContext;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 类功能描述
@@ -38,6 +41,15 @@ public class CHERRY {
      * 日期时间格式
      */
     public final static String PATTERN_DATE_TIME = PATTERN_DATE + " " + PATTERN_TIME;
+
+    //=================================================================
+    //  Local Cache
+    //=================================================================
+
+    /**
+     * Cache：AK
+     */
+    public static Map<String, InterfaceClient> CACHE_INTERFACE = new ConcurrentHashMap<>(100);
 
     public CHERRY() {}
 }

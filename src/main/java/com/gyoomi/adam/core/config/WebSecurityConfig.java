@@ -1,5 +1,6 @@
 package com.gyoomi.adam.core.config;
 
+import com.gyoomi.adam.core.filter.InterfaceAccessKeyFilter;
 import com.gyoomi.adam.core.filter.TokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -23,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
+                .addFilterBefore(new InterfaceAccessKeyFilter(), ChannelProcessingFilter.class)
                 .addFilterBefore(new TokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable()
                 .headers().frameOptions().sameOrigin()
