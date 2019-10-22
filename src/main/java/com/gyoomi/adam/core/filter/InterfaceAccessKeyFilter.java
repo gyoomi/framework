@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * The description of class
+ * Ak Filter
  *
  * @author Leon
  * @date 2019-10-22 16:17
@@ -76,6 +76,13 @@ public class InterfaceAccessKeyFilter implements Filter {
         return isValid;
     }
 
+    /**
+     * 过滤非认证URL
+     * <p>和Spring Security的白名单类似</p>
+     *
+     * @param request req
+     * @return 返回结果
+     */
     private boolean isExclusives(HttpServletRequest request) {
         List<String> exclusivePath = CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class).getSecurity().getExclusivePath();
         AntPathMatcher antPathMatcher = new AntPathMatcher();

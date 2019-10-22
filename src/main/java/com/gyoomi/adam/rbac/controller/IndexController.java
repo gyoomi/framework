@@ -5,17 +5,21 @@ import com.gyoomi.adam.core.CHERRY;
 import com.gyoomi.adam.core.jwt.JwtTokenUtils;
 import com.gyoomi.adam.core.jwt.JwtUser;
 import com.gyoomi.adam.core.model.Response;
+import com.gyoomi.adam.core.properties.AdamProperties;
 import com.gyoomi.adam.rbac.model.User;
 import com.gyoomi.adam.rbac.model.request.LoginVO;
 import com.gyoomi.adam.rbac.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 类功能描述
@@ -58,17 +62,22 @@ public class IndexController extends BaseController {
      */
     @PostMapping(value = "/api/login")
     public Response login(LoginVO loginVO) throws Exception {
+        AdamProperties adamProperties = CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class);
         User user = CHERRY.SPRING_CONTEXT.getBean(UserService.class).login(loginVO);
         if (null != user) {
             HashMap<String, Object> data = new HashMap<>(16);
 
             JwtUser jwtUser = new JwtUser();
             jwtUser.setUser(user);
+            String csrf = UUID.randomUUID().toString().replace("-", "");
             data.put("token", JwtTokenUtils.createToken(jwtUser));
+            data.put("csrf", csrf);
             data.put("createDate", LocalDateTime.now().format(CHERRY.FORMATTER_DATE_TIME));
 
 //            AbstractAuthenticationToken token = new UsernamePasswordAuthenticationToken(jwtUser, null, null);
 //            SecurityContextHolder.getContext().setAuthentication(token);
+            CHERRY.SPRING_CONTEXT.getBean(StringRedisTemplate.class).boundValueOps(CHERRY.REDIS_KEY_CSRF + csrf).set("", adamProperties.getSecurity().getSignIn().getExpiration(), TimeUnit.SECONDS);
+
 
             return Response.builder()
                     .code(HttpServletResponse.SC_OK)

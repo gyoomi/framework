@@ -22,6 +22,14 @@
       "type": "java.lang.String"
     },
     {
+      "name": "adam.csrf.header-name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "adam.csrf.request-name",
+      "type": "java.lang.String"
+    },
+    {
       "name": "adam.security.sign-in.lock",
       "type": "java.lang.Boolean"
     },

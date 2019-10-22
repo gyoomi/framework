@@ -34,13 +34,14 @@ public class ExampleController {
     private AdamProperties adamProperties;
 
     @GetMapping(value = "prop")
-    public void testProp() {
+    public String testProp() {
         System.out.println("----------------------------------");
         System.out.println(adamProperties.getAccessKey().getHeaderName());
         System.out.println(adamProperties.getAccessKey().getRequestName());
         System.out.println(adamProperties.getStatus());
         System.out.println(adamProperties.getVersion());
         System.out.println("----------------------------------");
+        return "ok at " + LocalDateTime.now().toString();
     }
 
     @GetMapping(value = "/save")

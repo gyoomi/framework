@@ -51,5 +51,14 @@ public class CHERRY {
      */
     public static Map<String, InterfaceClient> CACHE_INTERFACE = new ConcurrentHashMap<>(100);
 
+    //=================================================================
+    //  Redis Keys
+    //=================================================================
+
+    /**
+     * Redis key: CSRF
+     */
+    public static final String REDIS_KEY_CSRF = "csrf:";
+
     public CHERRY() {}
 }

@@ -44,6 +44,9 @@ public class AdamProperties {
     @NestedConfigurationProperty
     private Security security = new Security();
 
+    @NestedConfigurationProperty
+    private Csrf csrf = new Csrf();
+
 
     public static class Token {
 
@@ -69,6 +72,29 @@ public class AdamProperties {
     }
 
     public static class AccessKey {
+
+        private String headerName;
+
+        private String requestName;
+
+        public String getHeaderName() {
+            return headerName;
+        }
+
+        public void setHeaderName(String headerName) {
+            this.headerName = headerName;
+        }
+
+        public String getRequestName() {
+            return requestName;
+        }
+
+        public void setRequestName(String requestName) {
+            this.requestName = requestName;
+        }
+    }
+
+    public static class Csrf {
 
         private String headerName;
 
@@ -224,5 +250,13 @@ public class AdamProperties {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Csrf getCsrf() {
+        return csrf;
+    }
+
+    public void setCsrf(Csrf csrf) {
+        this.csrf = csrf;
     }
 }

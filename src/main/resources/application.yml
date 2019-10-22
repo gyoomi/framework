@@ -8,6 +8,9 @@ adam:
   token:
     header-name: Adam-Token
     request-name: adamToken
+  csrf:
+    header-name: Adam-X-CSRF
+    request-name: adamXCsrf
   security:
     jwt-token:
       header-name: Authorization
