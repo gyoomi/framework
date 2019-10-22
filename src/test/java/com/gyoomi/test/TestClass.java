@@ -6,8 +6,10 @@
 
 package com.gyoomi.test;
 
+import com.gyoomi.adam.core.CHERRY;
 import com.gyoomi.adam.core.jwt.JwtTokenUtils;
 import com.gyoomi.adam.core.jwt.JwtUser;
+import com.gyoomi.adam.core.properties.AdamProperties;
 import com.gyoomi.adam.rbac.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -73,5 +75,11 @@ public class TestClass {
         System.out.println("-----------------------------------");
         String token3 = "Bearer eyJhbGciOiJIUzUxMiJ9.e1yJwaG9uZU51bWJlciI6bnVsbCwiaGVhZEltZyI6bnVsbCwibmlja05hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJsb2dpbk5hbWUiOiJhZG1pbiIsImV4cCI6MTU3MTY1MTMwNCwiZW1haWwiOiIyMjJAcXEuY29tIiwiY3JlYXRlRGF0ZSI6MTU3MTY0OTUwNDE4NH0.BJSaL5qVAUV9s4Nny1HiEFH6znCQcdF7ziaxOuqk70dW4IABjr1BPaGq7MHjusk-3hDfOX5jd-6zfh91VKvqdw";
         System.out.println(JwtTokenUtils.valid(token3, jwtUser));
+    }
+
+    @Test
+    public void testExclusivePath() {
+        AdamProperties ad = CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class);
+        System.out.println(ad.getSecurity().getExclusivePath());
     }
 }

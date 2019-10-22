@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * 类功能描述
@@ -21,14 +21,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
-                .addFilterBefore(new TokenFilter(), ChannelProcessingFilter.class)
+                .addFilterBefore(new TokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable()
                 .headers().frameOptions().sameOrigin()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
-                    .authorizeRequests().antMatchers("/api/login", "/api/logout", "/interface/**", "/api/register").permitAll()
+                    .authorizeRequests().antMatchers("/api/register", "/interface/**", "/api/login", "/api/logout").permitAll()
                     .anyRequest().authenticated();
+
     }
 
     @Bean

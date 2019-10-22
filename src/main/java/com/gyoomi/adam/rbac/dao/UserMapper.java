@@ -20,6 +20,6 @@ public interface UserMapper extends BaseMapper<User> {
      * @param loginName 登录名
      * @return 用户
      */
-    @Select(" SELECT * FROM adam_user WHERE loginName = #{loginName} ")
+    @Select(" SELECT * FROM adam_user WHERE login_name = #{loginName} ")
     User findUserByLoginName(String loginName);
 }

@@ -45,6 +45,10 @@
     {
       "name": "adam.security.jwt-token.secret",
       "type": "java.lang.String"
+    },
+    {
+      "name": "adam.security.exclusivePath",
+      "type": "java.util.List"
     }
   ]
 }

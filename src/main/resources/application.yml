@@ -15,6 +15,7 @@ adam:
       secret: weor234,!!!
     sign-in:
       lock: false
+    exclusive-path: /api/register,/interface/**,/api/login,/api/logout
   status: dev
   version: v1.0
   name: adam-framework

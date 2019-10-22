@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 类功能描述
@@ -41,23 +42,22 @@ public class TokenFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (isInterfaces(request)) {
-            filterChain.doFilter(request, response);
-        } else {
-
+        if (!isExclusives(request)) {
             AdamProperties adamProperties = CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class);
             String jwtToken = request.getHeader(adamProperties.getSecurity().getJwtToken().getHeaderName());
             if (StringUtils.isBlank(jwtToken)) {
                 jwtToken = request.getParameter(adamProperties.getSecurity().getJwtToken().getRequestName());
             }
 
-            if (StringUtils.isNotBlank(jwtToken) && checkToken(jwtToken)) {
+            if (StringUtils.isNotBlank(jwtToken) && checkTokenStyle(jwtToken) && checkToken(jwtToken)) {
                 filterChain.doFilter(request, response);
             } else {
                 lg.warn("token参数为空或失效：{}", jwtToken);
                 Response responseResult = Response.builder().code(HttpServletResponse.SC_NOT_IMPLEMENTED).msg("Token参数为空或失效").build();
                 BaseController.writeJsonResponse(responseResult, response);
             }
+        } else {
+            filterChain.doFilter(request, response);
         }
     }
 
@@ -88,12 +88,12 @@ public class TokenFilter extends OncePerRequestFilter {
         return StringUtils.startsWith(token, prefix);
     }
 
-    private boolean isInterfaces(HttpServletRequest request) {
-        String[] urls = new String[]{"/api/register", "/interface/**"};
+    private boolean isExclusives(HttpServletRequest request) {
+        List<String> exclusivePath = CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class).getSecurity().getExclusivePath();
         AntPathMatcher antPathMatcher = new AntPathMatcher();
         String requestURI = request.getRequestURI();
-        for (String url : urls) {
-            if (antPathMatcher.match(url, requestURI)) {
+        for (String exclusive : exclusivePath) {
+            if (antPathMatcher.match(exclusive, requestURI)) {
                 return true;
             }
         }

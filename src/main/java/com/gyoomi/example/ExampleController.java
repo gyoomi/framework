@@ -89,4 +89,9 @@ public class ExampleController {
     }
 
 
+    @GetMapping(value = "/interface/paths")
+    public void testExclusivePath() {
+        AdamProperties ad = CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class);
+        System.out.println(ad.getSecurity().getExclusivePath());
+    }
 }

@@ -4,6 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 /**
  * Adam Config
  *
@@ -97,6 +99,8 @@ public class AdamProperties {
         @NestedConfigurationProperty
         private JwtTokenProperties jwtToken = new JwtTokenProperties();
 
+        private List<String> exclusivePath;
+
         public SignIn getSignIn() {
             return signIn;
         }
@@ -111,6 +115,14 @@ public class AdamProperties {
 
         public void setJwtToken(JwtTokenProperties jwtToken) {
             this.jwtToken = jwtToken;
+        }
+
+        public List<String> getExclusivePath() {
+            return exclusivePath;
+        }
+
+        public void setExclusivePath(List<String> exclusivePath) {
+            this.exclusivePath = exclusivePath;
         }
     }
 
