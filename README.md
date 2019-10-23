@@ -42,7 +42,7 @@ framework 是一个基于 Spring Boot 2.2.0.RELEASE 和 MyBatis 构建的快速�
 - ...
 
 # License
-无，纯粹开源分享，感谢大家 [Star](https://github.com/gyoomi/framework/stargazers) & [Fork](https://github.com/gyoomi/framework/network/members) 的支持。
+个人爱好，开源分享， 欢迎大家[Star](https://github.com/gyoomi/framework/stargazers) & [Fork](https://github.com/gyoomi/framework/network/members) 的支持。
 
 
 
