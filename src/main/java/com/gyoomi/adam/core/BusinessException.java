@@ -1,7 +1,7 @@
 package com.gyoomi.adam.core;
 
 /**
- * 类功能描述
+ * 业务异常
  *
  * @author Leon
  * @version 2019/3/18 22:21

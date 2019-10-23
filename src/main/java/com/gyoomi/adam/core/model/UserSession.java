@@ -20,7 +20,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The description of class
+ * UserSession
+ * <p>用于在三层中，获取当前操作用户的信息，其实等同于传统Session中防止的CurrentUser这样一个对象<p/>
  *
  * @author Leon
  * @date 2019-10-23 11:03

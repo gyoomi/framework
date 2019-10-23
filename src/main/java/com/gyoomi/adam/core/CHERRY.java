@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 类功能描述
+ * 系统级工具类
  *
  * @author Leon
  * @version 2019/3/17 11:47

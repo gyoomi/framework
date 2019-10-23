@@ -101,4 +101,15 @@ public abstract class BaseController {
             lg.error("Response Json回写失败：", e);
         }
     }
+
+    /**
+     * 获取Spring Bean
+     *
+     * @param clazz 类
+     * @param <T> 泛型
+     * @return 容器中的实例Bean
+     */
+    protected static <T> T getSpringBean(Class<T> clazz) {
+        return CHERRY.SPRING_CONTEXT.getBean(clazz);
+    }
 }

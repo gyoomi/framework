@@ -7,7 +7,7 @@
 package com.gyoomi.adam.core.thread;
 
 /**
- * 类功能描述
+ * 测试： Mail DTO
  *
  * @author Leon
  * @version 2018/8/18 23:29

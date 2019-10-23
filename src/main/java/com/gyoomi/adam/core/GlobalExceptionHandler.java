@@ -5,14 +5,13 @@ import com.gyoomi.adam.core.properties.AdamProperties;
 import com.gyoomi.adam.core.properties.AdamStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 类功能描述
+ * 异常处理
  *
  * @author Leon
  * @version 2019/3/18 22:23
@@ -21,9 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
     private static final Logger lg = LoggerFactory.getLogger(ExceptionHandler.class);
-
-    @Autowired
-    private AdamProperties adamProperties;
 
     public GlobalExceptionHandler() {}
 
@@ -38,7 +34,7 @@ public class GlobalExceptionHandler {
         lg.error("系统错误 ", ex);
         int code = 500;
         String msg = "系统繁忙，请稍后重试！";
-        if (AdamStatus.DEV.equals(adamProperties.getStatus())) {
+        if (AdamStatus.DEV.equals(CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class).getStatus())) {
             msg = ex.toString();
         }
         return Response.builder().code(code).msg(msg).build();

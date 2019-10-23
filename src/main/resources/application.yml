@@ -15,10 +15,10 @@ adam:
     jwt-token:
       header-name: Authorization
       request-name: authorization
-      secret: weor234,!!!
+      secret: weor234,!!!23424hhhw5
     sign-in:
       lock: false
-    exclusive-path: /api/register,/interface/**,/api/login,/api/logout
+    exclusive-path: /api/register,/api/login,/api/logout,/interface/** # This configuration is recommended to be equivalent to the Spring Security whitelist
   status: dev
   version: v1.0
   name: adam-framework

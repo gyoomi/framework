@@ -7,7 +7,7 @@
 package com.gyoomi.adam.core.thread;
 
 /**
- * 类功能描述
+ * 调度基类
  *
  * @author Leon
  * @version 2018/8/18 22:27

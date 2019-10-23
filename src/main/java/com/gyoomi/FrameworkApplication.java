@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 系统配置基类
+ * 系统启动类
  *
  * @author Leon
  * @version 2018/5/23 14:40

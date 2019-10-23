@@ -1,7 +1,7 @@
 package com.gyoomi.adam.core.properties;
 
 /**
- * 类功能描述
+ * Adam Status
  *
  * @author Leon
  * @version 2019/10/18 22:05

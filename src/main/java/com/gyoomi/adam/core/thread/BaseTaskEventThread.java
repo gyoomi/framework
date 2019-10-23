@@ -15,7 +15,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 类功能描述
+ * 多线程调度
  *
  * @author Leon
  * @version 2018/8/18 22:28

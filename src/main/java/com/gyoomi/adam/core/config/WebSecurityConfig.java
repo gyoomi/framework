@@ -12,7 +12,7 @@ import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * 类功能描述
+ * WebSecurityConfig
  *
  * @author Leon
  * @version 2019/10/21 20:50

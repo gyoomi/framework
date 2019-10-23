@@ -12,7 +12,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * The description of class
+ * 示例模型
  *
  * @author Leon
  * @date 2019-10-18 15:33

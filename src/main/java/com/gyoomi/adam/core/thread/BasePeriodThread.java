@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 类功能描述
+ * 间隔任务调度
  *
  * @author Leon
  * @version 2018/9/18 9:23

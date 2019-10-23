@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * The description of interface
+ * 示例 Mapper
  *
  * @author Leon
  * @date 2019-10-18 16:01

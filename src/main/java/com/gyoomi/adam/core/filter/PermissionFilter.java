@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The description of class
+ * 细粒度权限拦截
  *
  * @author Leon
  * @date 2019-10-22 16:52

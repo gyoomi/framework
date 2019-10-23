@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * The description of class
+ * token有效期拦截（模拟传统的Session,弥补JWT的不足）
  *
  * @author Leon
  * @date 2019-10-22 16:53
@@ -66,8 +66,6 @@ public class TokenSessionFilter extends OncePerRequestFilter {
         }
         jwtToken = jwtToken.replace(adamProperties.getSecurity().getJwtToken().getPrefix() + " ", "");
 
-        // false 不存在 -> 过期 true
-        // true  存在   -> 没有过期 false
         boolean existed = CHERRY.SPRING_CONTEXT.getBean(StringRedisTemplate.class).hasKey(CHERRY.REDIS_KEY_SESSION + jwtToken);
         return !existed;
     }

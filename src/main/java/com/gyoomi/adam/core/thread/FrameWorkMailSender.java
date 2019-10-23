@@ -13,7 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import javax.mail.internet.MimeMessage;
 
 /**
- * 类功能描述
+ * 测试：FrameWorkMailSender
  *
  * @author Leon
  * @version 2018/8/18 23:40

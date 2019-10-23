@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 类功能描述
+ * token拦截器
  *
  * @author Leon
  * @version 2019/10/21 20:58
