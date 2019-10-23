@@ -40,7 +40,7 @@ public class JwtTokenUtils {
     public static String createToken(Map<String, Object> claim) {
         LocalDateTime expireLocalDateTime = LocalDateTime.now().plus(adamProperties.getSecurity().getSignIn().getExpiration(), ChronoUnit.SECONDS);
 
-        String jwtPrefix = adamProperties.getSecurity().getJwtToken().getPrefix() + " ";
+        String jwtPrefix = adamProperties.getSecurity().getJwtToken().getPrefix();
         String jwtToken = Jwts.builder()
                 .setClaims(claim)
                 .setExpiration(DateUtils.localDateTimeToDate(expireLocalDateTime))

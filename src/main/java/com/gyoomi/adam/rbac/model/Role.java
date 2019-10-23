@@ -1,5 +1,6 @@
 package com.gyoomi.adam.rbac.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @version 2018/12/11 14:37
  */
 @Data
+@TableName(value = "adam_role")
 public class Role implements Serializable {
 
     /**

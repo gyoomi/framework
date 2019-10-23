@@ -1,8 +1,6 @@
 package com.gyoomi.adam.core.config;
 
-import com.gyoomi.adam.core.filter.CsrfFilter;
-import com.gyoomi.adam.core.filter.InterfaceAccessKeyFilter;
-import com.gyoomi.adam.core.filter.TokenFilter;
+import com.gyoomi.adam.core.filter.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,6 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new InterfaceAccessKeyFilter(), ChannelProcessingFilter.class)
                 .addFilterAfter(new CsrfFilter(), InterfaceAccessKeyFilter.class)
                 .addFilterBefore(new TokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new TokenSessionFilter(), TokenFilter.class)
+                .addFilterAfter(new PermissionFilter(), TokenSessionFilter.class)
                 .csrf().disable()
                 .headers().frameOptions().sameOrigin()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)

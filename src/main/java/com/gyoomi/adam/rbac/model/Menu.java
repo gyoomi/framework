@@ -1,5 +1,6 @@
 package com.gyoomi.adam.rbac.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gyoomi.adam.rbac.enums.MenuType;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -15,6 +16,7 @@ import java.util.Date;
  */
 @Accessors(chain = true)
 @Data
+@TableName(value = "adam_menu")
 public class Menu implements Serializable {
 
     /**

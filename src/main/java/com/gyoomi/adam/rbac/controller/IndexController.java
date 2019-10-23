@@ -1,11 +1,15 @@
 package com.gyoomi.adam.rbac.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.gyoomi.adam.core.BaseController;
 import com.gyoomi.adam.core.CHERRY;
 import com.gyoomi.adam.core.jwt.JwtTokenUtils;
 import com.gyoomi.adam.core.jwt.JwtUser;
 import com.gyoomi.adam.core.model.Response;
+import com.gyoomi.adam.core.model.UserSession;
 import com.gyoomi.adam.core.properties.AdamProperties;
+import com.gyoomi.adam.rbac.dao.MenuMapper;
+import com.gyoomi.adam.rbac.model.Menu;
 import com.gyoomi.adam.rbac.model.User;
 import com.gyoomi.adam.rbac.model.request.LoginVO;
 import com.gyoomi.adam.rbac.service.UserService;
@@ -18,8 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * 类功能描述
@@ -70,14 +77,24 @@ public class IndexController extends BaseController {
             JwtUser jwtUser = new JwtUser();
             jwtUser.setUser(user);
             String csrf = UUID.randomUUID().toString().replace("-", "");
-            data.put("token", JwtTokenUtils.createToken(jwtUser));
+            String token = JwtTokenUtils.createToken(jwtUser);
+            data.put("token", token);
             data.put("csrf", csrf);
             data.put("createDate", LocalDateTime.now().format(CHERRY.FORMATTER_DATE_TIME));
 
-//            AbstractAuthenticationToken token = new UsernamePasswordAuthenticationToken(jwtUser, null, null);
-//            SecurityContextHolder.getContext().setAuthentication(token);
             CHERRY.SPRING_CONTEXT.getBean(StringRedisTemplate.class).boundValueOps(CHERRY.REDIS_KEY_CSRF + csrf).set("", adamProperties.getSecurity().getSignIn().getExpiration(), TimeUnit.SECONDS);
 
+            // 添加UserSession缓存
+            UserSession userSession = new UserSession();
+            userSession.setToken(CHERRY.REDIS_KEY_SESSION + token);
+            userSession.setUserId(user.getId());
+            userSession.setLoginName(user.getLoginName());
+            userSession.setNickName(user.getNickName());
+            List<Menu> menuList = CHERRY.SPRING_CONTEXT.getBean(MenuMapper.class).findMenuListByUserId(user.getId());
+            Set<String> menuSet = menuList.parallelStream().map(Menu::getUrl).collect(Collectors.toSet());
+            userSession.setUrls(menuSet);
+            String jwtToken = token.replace(adamProperties.getSecurity().getJwtToken().getPrefix() + " ", "");
+            CHERRY.SPRING_CONTEXT.getBean(StringRedisTemplate.class).boundValueOps(CHERRY.REDIS_KEY_SESSION + jwtToken).set(JSON.toJSONString(userSession), adamProperties.getSecurity().getSignIn().getExpiration(), TimeUnit.SECONDS);
 
             return Response.builder()
                     .code(HttpServletResponse.SC_OK)

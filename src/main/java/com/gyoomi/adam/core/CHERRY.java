@@ -60,5 +60,10 @@ public class CHERRY {
      */
     public static final String REDIS_KEY_CSRF = "csrf:";
 
+    /**
+     * Redis key: Session
+     */
+    public static final String REDIS_KEY_SESSION = "session:";
+
     public CHERRY() {}
 }

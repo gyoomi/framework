@@ -1,5 +1,6 @@
 package com.gyoomi.adam.rbac.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
  */
 @Accessors(chain = true)
 @Data
+@TableName(value = "adam_user_role")
 public class UserRole implements Serializable {
 
     /**
