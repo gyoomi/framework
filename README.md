@@ -15,6 +15,13 @@ framework 是一个基于 Spring Boot 2.2.0.RELEASE 和 MyBatis 构建的快速�
 - 特别适合前后端后分离的项目开发(无缝与Vue、Flutter、Android、IOS)衔接
 - 基于当前最新的Spring Boot 2.2.0.RELEASE稳定版，尝鲜最新特性
 
+## 环境要求
+- JDK 8+
+- Maven 3.3+
+- Redis 3.0+
+- MySQL 5.5+
+
+
 ## 快速上手
 1. `clone`项目
 2. 在数据库初始化`init.sql`脚本，并修改相应的数据库连接信息
@@ -32,6 +39,44 @@ framework 是一个基于 Spring Boot 2.2.0.RELEASE 和 MyBatis 构建的快速�
 - 数据库设计：表名命名规范 `业务模块_tableName`;列名命名规范 `name` `login_name` 多个单词使用下划线，切勿使用关键字
 - 工具类：建议先从`apache-commons-*` 和 `guava` 里面找，避免重复造轮子
 - 接口文档：建议使用SwaggerUI、[ShowDoc](https://github.com/star7th/showdoc)等
+
+## 调用示例
+
+1. 登录接口
+
+![](../doc/asserts/003.png)
+
+保存`csrf`和`token`.用于后续的需要鉴权的接口使用。
+
+2. 注册接口
+
+![](../doc/asserts/007.png)
+
+
+3. 系统接口(拥有权限)
+
+以`/api/example`接口为例。通过rbac的关系我们可以看出admin用户拥有操作其接口的权限。
+
+![](../doc/asserts/004.png)
+
+返回`200`，去数据库查看example发现多一条新纪录。而在传递头部参数的时候，如果`csrf`、`token`、`ak`有任意一个不传和传递错误的，后台都会报出相应的错误提示。
+
+4. 系统接口(没有权限)
+
+以`/api/paths`接口为例。通过rbac的关系我们可以看出admin用户**不拥有**操作其接口的权限。
+
+![](../doc/asserts/006.png)
+
+返回`403`，提示权限不足。此时头部传递三个头部参数。
+
+5. 第三方接口
+
+以`/interface/props`接口为例。
+
+![](../doc/asserts/005.png)
+
+通过结果发现`调用成功`。而此时头部并没有传递任何参数。
+
 
 ## 技术文档
 - Spring Boot （[查看Spring Boot学习&使用指南](https://docs.spring.io/spring-boot/docs/2.2.0.RELEASE/reference/html/getting-started.html#getting-started)）

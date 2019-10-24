@@ -98,6 +98,7 @@ public class IndexController extends BaseController {
 
             return Response.builder()
                     .code(HttpServletResponse.SC_OK)
+                    .msg("ok")
                     .data(data)
                     .build();
         } else {
