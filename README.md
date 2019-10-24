@@ -44,20 +44,20 @@ framework 是一个基于 Spring Boot 2.2.0.RELEASE 和 MyBatis 构建的快速�
 
 1. 登录接口
 
-![](../doc/asserts/003.png)
+![](./doc/asserts/003.png)
 
 保存`csrf`和`token`.用于后续的需要鉴权的接口使用。
 
 2. 注册接口
 
-![](../doc/asserts/007.png)
+![](./doc/asserts/007.png)
 
 
 3. 系统接口(拥有权限)
 
 以`/api/example`接口为例。通过rbac的关系我们可以看出admin用户拥有操作其接口的权限。
 
-![](../doc/asserts/004.png)
+![](./doc/asserts/004.png)
 
 返回`200`，去数据库查看example发现多一条新纪录。而在传递头部参数的时候，如果`csrf`、`token`、`ak`有任意一个不传和传递错误的，后台都会报出相应的错误提示。
 
@@ -65,7 +65,7 @@ framework 是一个基于 Spring Boot 2.2.0.RELEASE 和 MyBatis 构建的快速�
 
 以`/api/paths`接口为例。通过rbac的关系我们可以看出admin用户**不拥有**操作其接口的权限。
 
-![](../doc/asserts/006.png)
+![](./doc/asserts/006.png)
 
 返回`403`，提示权限不足。此时头部传递三个头部参数。
 
@@ -73,7 +73,7 @@ framework 是一个基于 Spring Boot 2.2.0.RELEASE 和 MyBatis 构建的快速�
 
 以`/interface/props`接口为例。
 
-![](../doc/asserts/005.png)
+![](./doc/asserts/005.png)
 
 通过结果发现`调用成功`。而此时头部并没有传递任何参数。
 
