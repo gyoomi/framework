@@ -1,4 +1,4 @@
-![Licence](https://img.shields.io/badge/licence-none-green.svg)
+![Licence](https://camo.githubusercontent.com/708975d66a516f87800f9d8fe9b847332b841cd2/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f616c69626162612f647562626f2e737667)
 ## 简介
 framework 是一个基于 Spring Boot 2.2.0.RELEASE 和 MyBatis 构建的快速开发的种子项目，适用广大的中小型公司构建API、Restful API的脚手架。该项目从众多实际项目中剥离出来，简单、易用、易拓展，加快我们开发的速度，减少我们苦逼的加班。
 
