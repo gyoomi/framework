@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -109,5 +110,21 @@ public class ExampleController extends BaseController {
     public void testExclusivePath() {
         AdamProperties ad = CHERRY.SPRING_CONTEXT.getBean(AdamProperties.class);
         System.out.println(ad.getSecurity().getExclusivePath());
+    }
+
+    /**
+     * 示例分页查询
+     *
+     * @param name name
+     * @param req req
+     * @return 分页数据
+     */
+    @GetMapping(value = "/interface/page")
+    public Response examplePage(String name, HttpServletRequest req) {
+
+        return Response.builder()
+                    .code(HttpServletResponse.SC_OK)
+                    .data(getSpringBean(ExampleService.class).findByPage(getPageSort(req), name))
+                    .build();
     }
 }

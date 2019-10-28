@@ -2,7 +2,9 @@ package com.gyoomi.adam.core;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.gyoomi.adam.core.model.PageSort;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gyoomi.adam.core.model.Response;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -55,19 +57,47 @@ public abstract class BaseController {
         return obj;
     }
 
-    protected PageSort getPageSort(HttpServletRequest req) {
-        PageSort ps = new PageSort();
-        if (StringUtils.isNotBlank(req.getParameter("pageNo"))) {
-            ps.setPageNo(Long.valueOf(req.getParameter("page")));
-        }
+    /**
+     * 获取分页数据对象
+     *
+     * @param req req
+     * @return 分页数据对象
+     */
+    protected IPage getPageSort(HttpServletRequest req) {
+        return getPageSort(req, true);
+    }
 
+    /**
+     * 获取分页数据对象
+     *
+     * @param req req
+     * @param camelToUnderLine 是否开启驼峰转下划线
+     * @return 分页数据对象
+     */
+    protected IPage getPageSort(HttpServletRequest req, boolean camelToUnderLine) {
+        IPage page = new Page();
+
+        if (StringUtils.isNotBlank(req.getParameter("pageNum"))) {
+            page.setCurrent(Long.parseLong(req.getParameter("pageNum")));
+        }
         if (StringUtils.isNotBlank(req.getParameter("pageSize"))) {
-            ps.setPageSize(Integer.valueOf(req.getParameter("pageSize")));
+            page.setSize(Long.parseLong(req.getParameter("pageSize")));
         }
 
-        ps.setSortName(req.getParameter("sort"));
-        ps.setSortOrder(req.getParameter("order"));
-        return ps;
+        if (StringUtils.isNotBlank(req.getParameter("orderField"))) {
+            OrderItem orderItem = new OrderItem();
+            if (camelToUnderLine) {
+                orderItem.setColumn(com.baomidou.mybatisplus.core.toolkit.StringUtils.camelToUnderline(req.getParameter("orderField")));
+            } else {
+                orderItem.setColumn(req.getParameter("orderField"));
+            }
+
+            if (StringUtils.isNotBlank(req.getParameter("orderSort")) && "desc".equalsIgnoreCase(req.getParameter("orderSort"))) {
+                orderItem.setAsc(false);
+            }
+            page.orders().add(orderItem);
+        }
+        return page;
     }
 
     protected static boolean isAjaxRequest(HttpServletRequest req) {

@@ -7,7 +7,9 @@
 package com.gyoomi.example;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 示例 Mapper
@@ -17,4 +19,17 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ExampleMapper extends BaseMapper<Example> {
+
+
+    @Select("" +
+            "<script>" +
+            "  SELECT " +
+            "    * " +
+            "  FROM " +
+            "    example " +
+            "  WHERE " +
+            "    1=1 " +
+            "  <if test=\"null != name and '' != name\"> AND name LIKE concat('%', #{name}, '%')</if>" +
+            "</script>")
+    IPage<Example> findByPage(IPage<Example> page, String name);
 }
